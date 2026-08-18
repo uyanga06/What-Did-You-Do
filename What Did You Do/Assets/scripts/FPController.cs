@@ -1,10 +1,15 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 public class FPController : MonoBehaviour
 {
-    [Header("Walk Settings")] // refers to the input actions for walking. previously named Movement Settings
+    [Header("Action Settings")] // refers to the input actions for walking, running and jumping. previously named Movement Settings
     public float moveSpeed = 5f;
+    public float runSpeed = 12f;
+    private const float doubleClickTime = 0.3f; // Time window for detecting double-click for running
+    private float lastClickTime; // Time of the last click for running
     public float gravity = -9.81f;
+    public float jumpHeight = 2f;
 
     [Header("Look Settings")] // refers to the input actions for looking around 
     public Transform cameraTransform;
@@ -55,4 +60,34 @@ public class FPController : MonoBehaviour
         0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed && controller.isGrounded) // Check that the Jump action was successfully performed and that the player is currently standing on the ground.
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); //Calculates the upward speed needed for the player to reach the chosen jump height while accounting for gravity.
+        }
+    }
+
+    public void OnRun(InputAction.CallbackContext context)
+    {
+       if(context.performed) // Handle running logic
+       {
+           Run(); // Set the movement speed to the running speed
+       }
+      
+    }
+    private void Run()
+    {
+        float currentTime = Time.time;
+        if (currentTime - lastClickTime < doubleClickTime)
+        {
+            moveSpeed = runSpeed; // Set the movement speed to the running speed
+        }
+        else
+        {
+            moveSpeed = 5f; // Reset the movement speed to the walking speed
+        }
+        lastClickTime = currentTime; // Update the last click time
+    }
+
 }
