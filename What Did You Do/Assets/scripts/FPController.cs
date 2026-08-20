@@ -1,44 +1,216 @@
+
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
+using System;
 public class FPController : MonoBehaviour
 {
-    [Header("Action Settings")] // refers to the input actions for walking, running and jumping. previously named Movement Settings
+    //MUNE
+    Controls playerInput;
+    Controls.PlayerActions input;
+
+    CharacterController controller;
+    Animator animator;
+    //AudioSource audioSource;
+
+    bool isGrounded;
+
+    public const string IDLE = "Idle";
+    public const string WALK = "Walk";
+    public const string ATTACK1 = "Attack 1";
+    //public const string ATTACK2 = "Attack 2";
+
+    [Header("Attacking")]
+    public float attackDistance = 3f;
+    public float attackDelay = 0.4f;
+    public float attackSpeed = 1f;
+    public int attackDamage = 1;
+    public LayerMask attackLayer;
+
+    //public GameObject hitEffect;
+    //public AudioClip swordSwing;
+    //public AudioClip hitSound;
+
+    bool attacking = false;
+    bool readyToAttack = true;
+    int attackCount;
+
+    //UYANGA
+
+    [Header("Walk Settings")] // refers to the input actions for walking. previously named Movement Settings
     public float moveSpeed = 5f;
-    public float runSpeed = 12f;
-    private const float doubleClickTime = 0.3f; // Time window for detecting double-click for running
-    private float lastClickTime; // Time of the last click for running
     public float gravity = -9.81f;
-    public float jumpHeight = 2f;
 
     [Header("Look Settings")] // refers to the input actions for looking around 
     public Transform cameraTransform;
     public float lookSensitivity = 2f;
     public float verticalLookLimit = 90f;
-    private CharacterController controller;
+    //private CharacterController controller;
     private Vector2 moveInput;
     private Vector2 lookInput;
     private Vector3 velocity;
     private float verticalRotation = 0f;
+
+    //U+M
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        animator = GetComponentInChildren<Animator>();
+        //audioSource = GetComponent<AudioSource>();
+        
+        playerInput = new Controls();
+        input = playerInput.Player;
+        AssignInputs();
     }
+
     private void Update()
     {
         HandleWalk(); //was HandleMovement
         HandleLook();
+
+        isGrounded = controller.isGrounded;
+
+        // Repeat Inputs
+        if (input.Attack.IsPressed())
+        { Attack(); }
+
+        //SetAnimations();
     }
+
+    //MUNE - Animations
+
+    void AssignInputs()
+    {
+        input.Attack.started += ctx => Attack();
+    }
+
+    string currentAnimationState;
+
+    public void ChangeAnimationState(string newState)
+    {
+        // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
+        if (currentAnimationState == newState) return;
+
+        //// PLAY THE ANIMATION //
+        //currentAnimationState = newState;
+        //animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
+    }
+
+    //void SetAnimations()
+    //{
+    //    // If player is not attacking
+    //    if (!attacking)
+    //    {
+    //        if (velocity.x == 0 && velocity.z == 0)
+    //        { ChangeAnimationState(ATTACK1); }
+    //        //else
+    //        //{ ChangeAnimationState(WALK); }
+    //    }
+    //}
+
+    //Attaking behaviour
+
+    public void Attack()
+    {
+        if (!readyToAttack || attacking) return;
+
+        readyToAttack = false;
+        attacking = true;
+
+      
+  
+        if (playerInput.Player.Attack.IsPressed())
+        {
+            Attack();
+        }
+    
+
+    Invoke(nameof(ResetAttack), attackSpeed);
+        //Invoke(nameof(AttackRaycast), attackDelay);
+
+        //audioSource.pitch = Random.Range(0.9f, 1.1f);
+       // audioSource.PlayOneShot(swordSwing);
+
+        if (attackCount == 0)
+        {
+            ChangeAnimationState(ATTACK1);
+            attackCount++;
+        }
+
+        Debug.Log("Player attacked!");
+
+
+        //else
+        //{
+        //    ChangeAnimationState(ATTACK2);
+        //    attackCount = 0;
+        //}
+    }
+
+    void ResetAttack()
+    {
+        attacking = false;
+        readyToAttack = true;
+    }
+
+    //void AttackRaycast()
+    //{
+    //    if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, attackDistance, attackLayer))
+    //    {
+    //        HitTarget(hit.point);
+
+    //        if (hit.transform.TryGetComponent<Enemy>(out Enemy T))
+    //        { T.TakeDamage(attackDamage); }
+    //    }
+    //}
+
+    //void HitTarget(Vector3 pos)
+    //{
+    //    //audioSource.pitch = 1;
+    //    //audioSource.PlayOneShot(hitSound);
+
+    //    GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
+    //    Destroy(GO, 20);
+    //}
+
+
+
+    //UYANGA
     public void OnWalk(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
+
     public void OnLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
     }
+
+    //MUNE
+    public void Jump()
+    {
+       if (playerInput.Player.Jump.IsPressed())
+        {
+            Jump();
+        }
+    }
+
+    public void Run()
+    {
+        if (playerInput.Player.Jump.IsPressed())
+        {
+            Run();
+        }
+    }
+
+
+
     public void HandleWalk() //was HandleMovement
     {
         Vector3 move = transform.right * moveInput.x + transform.forward *
@@ -49,6 +221,7 @@ public class FPController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
+
     public void HandleLook()
     {
         float mouseX = lookInput.x * lookSensitivity;
@@ -60,34 +233,4 @@ public class FPController : MonoBehaviour
         0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
-    public void OnJump(InputAction.CallbackContext context)
-    {
-        if (context.performed && controller.isGrounded) // Check that the Jump action was successfully performed and that the player is currently standing on the ground.
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); //Calculates the upward speed needed for the player to reach the chosen jump height while accounting for gravity.
-        }
-    }
-
-    public void OnRun(InputAction.CallbackContext context)
-    {
-       if(context.performed) // Handle running logic
-       {
-           Run(); // Set the movement speed to the running speed
-       }
-      
-    }
-    private void Run()
-    {
-        float currentTime = Time.time;
-        if (currentTime - lastClickTime < doubleClickTime)
-        {
-            moveSpeed = runSpeed; // Set the movement speed to the running speed
-        }
-        else
-        {
-            moveSpeed = 5f; // Reset the movement speed to the walking speed
-        }
-        lastClickTime = currentTime; // Update the last click time
-    }
-
 }
