@@ -18,8 +18,8 @@ public class FPController : MonoBehaviour
 
     bool isGrounded;
 
-    public const string IDLE = "Idle";
-    public const string WALK = "Walk";
+    //public const string IDLE = "Idle";
+    //public const string WALK = "Walk";
     public const string ATTACK1 = "Attack 1";
     //public const string ATTACK2 = "Attack 2";
 
@@ -76,10 +76,6 @@ public class FPController : MonoBehaviour
 
         isGrounded = controller.isGrounded;
 
-        // Repeat Inputs
-        if (input.Attack.IsPressed())
-        { Attack(); }
-
         //SetAnimations();
     }
 
@@ -123,11 +119,15 @@ public class FPController : MonoBehaviour
         readyToAttack = false;
         attacking = true;
 
-      
-  
+        // Repeat Inputs
+        if (input.Attack.IsPressed())
+        { Attack(); }
+
         if (playerInput.Player.Attack.IsPressed())
         {
             Attack();
+            Debug.Log("Attacking");
+            Debug.Log("Left Button Pressed");
         }
     
 
