@@ -90,4 +90,54 @@ public class FPController : MonoBehaviour
         lastClickTime = currentTime; // Update the last click time
     }
 
+    //Pick Up:
+    [Header("Pick Up Settings")] //initial values for picking up an object
+    public float pickupRange = 20f;
+    public Transform holdPoint;
+    private ItemPickUp heldObject;
+
+    [Header("Throw Settings")] //initial values for throwing the object
+    public float throwForce = 5f;
+    public float throwVelocity = 1f;
+
+    public void OnPickUp(InputAction.CallbackContext context) //checks if there is an object that can be picked up/dropped
+    {
+        if (!context.performed) return;
+
+        if (heldObject == null)
+        {
+            Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+            {
+                ItemPickUp pickUp = hit.collider.GetComponent<ItemPickUp>();
+
+                if (pickUp != null)
+                {
+                    pickUp.PickUp(holdPoint);
+                    heldObject = pickUp;
+                }
+            }
+        }
+        else
+        {
+            heldObject.Drop();
+            heldObject = null;
+        }
+    }
+
+    public void OnThrow(InputAction.CallbackContext context) //checks if there is an object that can be thrown and then calculates the throw
+    {
+        if (!context.performed) return;
+        if (heldObject == null) return;
+
+        Vector3 dir = cameraTransform.forward;
+        Vector3 impulse = dir * throwForce + Vector3.up * throwVelocity;
+
+        heldObject.Throw(impulse);
+        heldObject = null;
+
+        Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
+    }
+
 }
