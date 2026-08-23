@@ -8,4 +8,11 @@ public class WeaponAttack : MonoBehaviour
     {
         player.Attack();
     }
+
+
+
+
+
+
+
 }

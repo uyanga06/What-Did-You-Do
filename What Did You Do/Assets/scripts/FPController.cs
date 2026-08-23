@@ -13,13 +13,12 @@ public class FPController : MonoBehaviour
     Controls.PlayerActions input;
 
     CharacterController controller;
-    Animator animator;
+    public Animator animator;
     //AudioSource audioSource;
 
     bool isGrounded;
 
-    //public const string IDLE = "Idle";
-    //public const string WALK = "Walk";
+   
     public const string ATTACK1 = "Attack 1";
     //public const string ATTACK2 = "Attack 2";
 
@@ -28,15 +27,20 @@ public class FPController : MonoBehaviour
     public float attackDelay = 0.4f;
     public float attackSpeed = 1f;
     public int attackDamage = 1;
+    public Transform weaponPoint;
     public LayerMask attackLayer;
 
-    //public GameObject hitEffect;
-    //public AudioClip swordSwing;
-    //public AudioClip hitSound;
-
+   
     bool attacking = false;
     bool readyToAttack = true;
     int attackCount;
+
+    public float jumpHeight = 1.5f;
+
+    //[Header("Player Health")]
+    //int currentHealth;
+    //public int maxHealth;
+
 
     //UYANGA
 
@@ -61,12 +65,16 @@ public class FPController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
 
-        animator = GetComponentInChildren<Animator>();
-        //audioSource = GetComponent<AudioSource>();
+        //animator = GetComponentInChildren<Animator>();
         
+        //audioSource = GetComponent<AudioSource>();
+
         playerInput = new Controls();
         input = playerInput.Player;
-        AssignInputs();
+        //AssignInputs();
+
+        //PLAYER HEALTH
+        //currentHealth = maxHealth;
     }
 
     private void Update()
@@ -80,12 +88,17 @@ public class FPController : MonoBehaviour
     }
 
     //MUNE - Animations
+    //private void OnEnable()
+    //{
+    //    playerInput?.Enable();
+    //}
 
-    void AssignInputs()
-    {
-        input.Attack.started += ctx => Attack();
-    }
+    //private void OnDisable()
+    //{
+    //    playerInput?.Disable();
+    //}
 
+   
     string currentAnimationState;
 
     public void ChangeAnimationState(string newState)
@@ -93,24 +106,22 @@ public class FPController : MonoBehaviour
         // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
         if (currentAnimationState == newState) return;
 
-        //// PLAY THE ANIMATION //
-        //currentAnimationState = newState;
-        //animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
     }
 
-    //void SetAnimations()
-    //{
-    //    // If player is not attacking
-    //    if (!attacking)
-    //    {
-    //        if (velocity.x == 0 && velocity.z == 0)
-    //        { ChangeAnimationState(ATTACK1); }
-    //        //else
-    //        //{ ChangeAnimationState(WALK); }
-    //    }
-    //}
-
+    
     //Attaking behaviour
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            Attack();
+
+            Debug.Log("ON ATTACK CALLED");
+            Debug.Log("LEFT CLICK DETECTED");
+
+        }
+    }
 
     public void Attack()
     {
@@ -119,65 +130,46 @@ public class FPController : MonoBehaviour
         readyToAttack = false;
         attacking = true;
 
-        // Repeat Inputs
-        if (input.Attack.IsPressed())
-        { Attack(); }
-
-        if (playerInput.Player.Attack.IsPressed())
-        {
-            Attack();
-            Debug.Log("Attacking");
-            Debug.Log("Left Button Pressed");
-        }
-    
-
-    Invoke(nameof(ResetAttack), attackSpeed);
-        //Invoke(nameof(AttackRaycast), attackDelay);
-
-        //audioSource.pitch = Random.Range(0.9f, 1.1f);
-       // audioSource.PlayOneShot(swordSwing);
-
-        if (attackCount == 0)
-        {
-            ChangeAnimationState(ATTACK1);
-            attackCount++;
-        }
+        animator.SetTrigger("doAttack");
+        StartCoroutine(doAttack());
 
         Debug.Log("Player attacked!");
-
-
-        //else
-        //{
-        //    ChangeAnimationState(ATTACK2);
-        //    attackCount = 0;
-        //}
+        //Debug.Log("Attacking");
+        
+        //StartCoroutine(doAttack());
     }
 
     void ResetAttack()
     {
+        //Debug.Log("===== RESET ATTACK CALLED =====");
+        //if (!attacking) return;
+
         attacking = false;
         readyToAttack = true;
     }
 
-    //void AttackRaycast()
-    //{
-    //    if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, attackDistance, attackLayer))
-    //    {
-    //        HitTarget(hit.point);
+    //PLAYERHEALTH
 
-    //        if (hit.transform.TryGetComponent<Enemy>(out Enemy T))
-    //        { T.TakeDamage(attackDamage); }
-    //    }
+    
+    //public void TakeDamage(int amount)
+    //{
+    //    currentHealth -= amount;
+
+    //    if (currentHealth <= 0)
+    //    { Death(); }
     //}
 
-    //void HitTarget(Vector3 pos)
+    //void Death()
     //{
-    //    //audioSource.pitch = 1;
-    //    //audioSource.PlayOneShot(hitSound);
-
-    //    GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
-    //    Destroy(GO, 20);
+    //    // Death function
+    //    // TEMPORARY: Destroy Object
+    //    Destroy(gameObject);
     //}
+
+
+
+
+
 
 
 
@@ -193,22 +185,18 @@ public class FPController : MonoBehaviour
     }
 
     //MUNE
-    public void Jump()
+    public void OnJump(InputAction.CallbackContext context)
     {
-       if (playerInput.Player.Jump.IsPressed())
+       if (context.performed && controller.isGrounded)
         {
-            Jump();
+        
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calculates the upward speed needed for the player to reach the chosen jump height while accounting for gravity.
+          
+
         }
     }
 
-    public void Run()
-    {
-        if (playerInput.Player.Jump.IsPressed())
-        {
-            Run();
-        }
-    }
-
+    
 
 
     public void HandleWalk() //was HandleMovement
@@ -233,4 +221,168 @@ public class FPController : MonoBehaviour
         0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
+
+    public IEnumerator doAttack()
+    {
+        //Debug.Log("doAttack coroutine started");
+        Debug.Log("IEnumerator STARTED");
+
+        if (!attacking) yield break;
+        animator.SetTrigger("doAttack");
+
+        yield return new WaitForSeconds(1f);
+
+        //Debug.Log("Returning to idle");
+        Debug.Log("IEnumerator REACHED RESET");
+
+
+
+        //animator.SetTrigger("backToIdle");
+
+        if (attacking)
+        {
+            animator.SetTrigger("backToIdle");
+            ResetAttack();
+        }
+
+        //ResetAttack();
+
+        yield break;
+        //animator.SetTrigger("doAttack");
+
+        //yield return null;
+
+        //ResetAttack();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //NOT WORKING 
+
+    //void AssignInputs()
+    //{
+    //    input.Attack.started += ctx => Attack();
+    //    //animator.Play(ATTACK1, 0, 0f);
+
+    //    Debug.Log("Player attacked!");
+
+    //}
+
+
+    //if (attackCount == 0)
+    //{
+    //    ChangeAnimationState(ATTACK1);
+    //    attackCount++;
+    //}
+
+    //if (playerInput.Player.Attack.IsPressed())
+    //{
+    //    Attack();
+    //    Debug.Log("Attacking");
+    //    Debug.Log("Left Button Pressed");
+    //}
+
+
+    //void AttackRaycast()
+    //{
+    //    if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, attackDistance, attackLayer))
+    //    {
+    //        HitTarget(hit.point);
+
+    //        if (hit.transform.TryGetComponent<Enemy>(out Enemy T))
+    //        { T.TakeDamage(attackDamage); }
+    //    }
+    //}
+
+    //void HitTarget(Vector3 pos)
+    //{
+    //    //audioSource.pitch = 1;
+    //    //audioSource.PlayOneShot(hitSound);
+
+    //    GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
+    //    Destroy(GO, 20);
+    //}
+
+    //Invoke(nameof(AttackRaycast), attackDelay);
+
+    //audioSource.pitch = Random.Range(0.9f, 1.1f);
+    // audioSource.PlayOneShot(swordSwing);
+
+    // Repeat Inputs
+    //if (input.Attack.IsPressed())
+    //{ Attack(); }
+
+
+    //// PLAY THE ANIMATION //
+    //currentAnimationState = newState;
+    //animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
+
+
+    //void SetAnimations()
+    //{
+    //    // If player is not attacking
+    //    if (!attacking)
+    //    {
+    //        if (velocity.x == 0 && velocity.z == 0)
+    //        { ChangeAnimationState(ATTACK1); }
+    //        //else
+    //        //{ ChangeAnimationState(WALK); }
+    //    }
+    //}
+
+    //public const string IDLE = "Idle";
+    //public const string WALK = "Walk";
+
+    //public GameObject hitEffect;
+    //public AudioClip swordSwing;
+    //public AudioClip hitSound;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
