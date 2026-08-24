@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SecretRoom
   - Secret room
+  - Enemy
+  - Attack
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - Water
   - UI
   - Secret room
-  - 
-  - 
+  - Player
+  - Enemy
   - 
   - 
   - 

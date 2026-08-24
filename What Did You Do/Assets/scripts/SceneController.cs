@@ -18,5 +18,7 @@ public class SceneController : MonoBehaviour
     public void OnAntidoteClick()
     {
         SceneManager.LoadScene("SecretRoom");
+
+       // Debug.Log("Scene change");
     }
 }
