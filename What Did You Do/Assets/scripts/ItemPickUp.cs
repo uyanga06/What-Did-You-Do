@@ -8,7 +8,7 @@ public class ItemPickUp : MonoBehaviour
     public GameObject ThrowPrompt;
     public GameObject PickUpPrompt;
 
-    void Star()
+    void Start()
     {
         PickUpPrompt.SetActive(true);
         DropPrompt.SetActive(false);
