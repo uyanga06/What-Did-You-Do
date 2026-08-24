@@ -9,7 +9,12 @@ public class Enemy : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-    public float hHealth;
+    public Animator animator;
+
+    public float Health;
+
+   [SerializeField] EnemyHealth eh;
+
 
     //Patroling
     public Vector3 walkPoint;
@@ -24,12 +29,12 @@ public class Enemy : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
-    private void Awazke()
+    private void Awake()
     {
         //player = GameObject.Find("PlayerObj").transform;
         //agent = GetComponent<NavMeshAgent>();
 
-        GameObject playerObj = GameObject.Find("PlayerObj");
+        GameObject playerObj = GameObject.Find("Player");
         if (playerObj != null)
             player = playerObj.transform;
 
@@ -89,6 +94,8 @@ public class Enemy : MonoBehaviour
 
         transform.LookAt(player); //to look at player as enemy approaches player
 
+        Debug.Log("Player Attacked");
+
         if (!alreadyAttacked)
         {
            //Where my code for an attack should go
@@ -99,6 +106,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
@@ -106,10 +114,13 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        hHealth -= damage;
+        eh.TakeDamage(damage);
+        //Health -= damage;
 
-        if (hHealth <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+        //if (hHealth <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
     }
+
+
 
     private void DestroyEnemy()
     {

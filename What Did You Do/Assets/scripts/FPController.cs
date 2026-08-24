@@ -8,39 +8,40 @@ using UnityEngine.InputSystem;
 using System;
 public class FPController : MonoBehaviour
 {
-    //MUNE
-    Controls playerInput;
-    Controls.PlayerActions input;
+    ////MUNE
+    //Controls playerInput;
+    //Controls.PlayerActions input;
 
-    CharacterController controller;
-    public Animator animator;
-    //AudioSource audioSource;
+    
+    //public Animator animator;
+    ////AudioSource audioSource;
 
-    bool isGrounded;
+    
 
-   
-    public const string ATTACK1 = "Attack 1";
-    //public const string ATTACK2 = "Attack 2";
 
-    [Header("Attacking")]
-    public float attackDistance = 3f;
-    public float attackDelay = 0.4f;
-    public float attackSpeed = 1f;
-    public int attackDamage = 1;
-    public Transform weaponPoint;
-    public LayerMask attackLayer;
+    //public const string ATTACK1 = "Attack 1";
+    ////public const string ATTACK2 = "Attack 2";
 
-   
-    bool attacking = false;
-    bool readyToAttack = true;
-    int attackCount;
+    //[Header("Attacking")]
+    //public float attackDistance = 3f;
+    //public float attackDelay = 0.4f;
+    //public float attackSpeed = 1f;
+    //public int attackDamage = 1;
+    //public Transform weaponPoint;
+    //public LayerMask attackLayer;
 
-    public float jumpHeight = 1.5f;
+
+    //bool attacking = false;
+    //bool readyToAttack = true;
+    //int attackCount;
+
+    //public float jumpHeight = 1.5f;
 
     //[Header("Player Health")]
     //int currentHealth;
     //public int maxHealth;
-
+    CharacterController controller;
+    bool isGrounded;
 
     //UYANGA
 
@@ -69,9 +70,9 @@ public class FPController : MonoBehaviour
         
         //audioSource = GetComponent<AudioSource>();
 
-        playerInput = new Controls();
-        input = playerInput.Player;
-        //AssignInputs();
+        //playerInput = new Controls();
+        //input = playerInput.Player;
+        ////AssignInputs();
 
         //PLAYER HEALTH
         //currentHealth = maxHealth;
@@ -99,54 +100,55 @@ public class FPController : MonoBehaviour
     //}
 
    
-    string currentAnimationState;
+    //string currentAnimationState;
 
-    public void ChangeAnimationState(string newState)
-    {
-        // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
-        if (currentAnimationState == newState) return;
+    //public void ChangeAnimationState(string newState)
+    //{
+    //    // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
+    //    if (currentAnimationState == newState) return;
 
-    }
+    //}
 
     
     //Attaking behaviour
 
-    public void OnAttack(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            Attack();
+    //public void OnAttack(InputAction.CallbackContext context)
+    //{
+    //    if (context.performed)
+    //    {
+    //        Attack();
 
-            Debug.Log("ON ATTACK CALLED");
-            Debug.Log("LEFT CLICK DETECTED");
+    //        Debug.Log("ON ATTACK CALLED");
+    //        Debug.Log("LEFT CLICK DETECTED");
 
-        }
-    }
+    //    }
+    //}
 
-    public void Attack()
-    {
-        if (!readyToAttack || attacking) return;
+    //public void Attack()
+    //{
+    //    if (!readyToAttack || attacking) return;
 
-        readyToAttack = false;
-        attacking = true;
+    //    readyToAttack = false;
+    //    attacking = true;
 
-        animator.SetTrigger("doAttack");
-        StartCoroutine(doAttack());
+    //    animator.SetTrigger("doAttack");
+    //    StartCoroutine(doAttack());
 
-        Debug.Log("Player attacked!");
-        //Debug.Log("Attacking");
+    //    Debug.Log("Player attacked!");
+    //    //Debug.Log("Attacking");
         
-        //StartCoroutine(doAttack());
-    }
+    //    //StartCoroutine(doAttack());
+    //}
 
-    void ResetAttack()
-    {
-        //Debug.Log("===== RESET ATTACK CALLED =====");
-        //if (!attacking) return;
+    //void ResetAttack()
+    //{
+    //    //Debug.Log("===== RESET ATTACK CALLED =====");
+    //    //if (!attacking) return;
 
-        attacking = false;
-        //readyToAttack = true;
-    }
+    //    attacking = false;
+    //    readyToAttack = true;
+    //    return;
+    //}
 
     //PLAYERHEALTH
 
@@ -184,17 +186,17 @@ public class FPController : MonoBehaviour
         lookInput = context.ReadValue<Vector2>();
     }
 
-    //MUNE
-    public void OnJump(InputAction.CallbackContext context)
-    {
-       if (context.performed && controller.isGrounded)
-        {
+    ////MUNE
+    //public void OnJump(InputAction.CallbackContext context)
+    //{
+    //   if (context.performed && controller.isGrounded)
+    //    {
         
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calculates the upward speed needed for the player to reach the chosen jump height while accounting for gravity.
+    //        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calculates the upward speed needed for the player to reach the chosen jump height while accounting for gravity.
           
 
-        }
-    }
+    //    }
+    //}
 
     
 
@@ -222,38 +224,38 @@ public class FPController : MonoBehaviour
         transform.Rotate(Vector3.up * mouseX);
     }
 
-    public IEnumerator doAttack()
-    {
-        //Debug.Log("doAttack coroutine started");
-        Debug.Log("IEnumerator STARTED");
+    //public IEnumerator doAttack()
+    //{
+    //    //Debug.Log("doAttack coroutine started");
+    //    Debug.Log("IEnumerator STARTED");
 
-        if (!attacking) yield break;
-        animator.SetTrigger("doAttack");
+    //    if (!attacking) yield break;
+    //    animator.SetTrigger("doAttack");
 
-        yield return new WaitForSeconds(1f);
+    //    yield return new WaitForSeconds(1f);
 
-        //Debug.Log("Returning to idle");
-        Debug.Log("IEnumerator REACHED RESET");
+    //    //Debug.Log("Returning to idle");
+    //    Debug.Log("IEnumerator REACHED RESET");
 
 
 
-        //animator.SetTrigger("backToIdle");
+    //    //animator.SetTrigger("backToIdle");
 
-        if (attacking)
-        {
-            animator.SetTrigger("backToIdle");
-            ResetAttack();
-        }
+    //    if (attacking)
+    //    {
+    //        animator.SetTrigger("backToIdle");
+    //        ResetAttack();
+    //    }
 
-        //ResetAttack();
+    //    //ResetAttack();
 
-        yield break;
-        //animator.SetTrigger("doAttack");
+    //    yield break;
+    //    //animator.SetTrigger("doAttack");
 
-        //yield return null;
+    //    //yield return null;
 
-        //ResetAttack();
-    }
+    //    //ResetAttack();
+    //}
 
 
 

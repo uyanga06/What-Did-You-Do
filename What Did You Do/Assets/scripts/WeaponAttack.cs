@@ -1,18 +1,96 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class WeaponAttack : MonoBehaviour
 {
-    public FPController player;
+    //public FPController player;
 
-    public void Attack()
+    [SerializeField] private float weaponHitRadius;
+    [SerializeField] private int damage = 2;
+
+    [SerializeField] private LayerMask targetLayer;
+
+    public Transform attackPoint;
+    public float attackRange = 0.5f;
+    public LayerMask enemyLayers;
+
+    //public void Attack()
+    //{
+    //    player.Attack();
+    //}
+    private void Update()
     {
-        player.Attack();
+        
+
+        //DetectHit();
+        
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        EnemyHealth enemy = other.GetComponentInParent<EnemyHealth>();
+        if (enemy != null)
+        {
+            enemy.TakeDamage(damage); 
+            
+            Debug.Log("Player weapon hit enemy!");
+        }
+    }
+
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        if (context.performed) //if left mouse button is pressed, invoke attack
+        {
+            Attack();
+        }
+    }
+
+    void Attack()
+    {
+       Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers); //detects enemies in range
+
+        foreach (Collider enemy in hitEnemies)
+        {
+            EnemyHealth health = enemy.GetComponentInParent<EnemyHealth>();
+
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+            
+            Debug.Log("We hit them!");
+        }
+
+
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (attackPoint == null) //in case attackPoint hasn't been assigned, return
+            return;
+        Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
 
 
+    //private void DetectHit()
+    //{
+    //    Collider[] hit = Physics.OverlapSphere(transform.position, weaponHitRadius, targetLayer);
+
+    //    if (hit.Length > 0)
+    //    {
+    //        EnemyHealth Enemy = hit[0].GetComponentInParent<EnemyHealth>();
+
+    //        Enemy.TakeDamage(damage);
+
+    //        gameObject.SetActive(true);
+    //    }
 
 
-
+    //}
 
 }

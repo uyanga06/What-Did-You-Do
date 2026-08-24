@@ -1,27 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class PlayerHealth : MonoBehaviour
 {
-    int currentHealth;
+    public int currentHealth;
     public int maxHealth;
+    public Slider slider;
 
-    void Awake()
+    void Start()
     {
         currentHealth = maxHealth;
+        slider.maxValue = maxHealth;
+        slider.value = currentHealth;
     }
 
     public void TakeDamage(int amount)
     {
         currentHealth -= amount;
+        slider.value = currentHealth;
 
         if (currentHealth <= 0)
-        { Death(); }
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void Death()
-    {
-        // Death function
-        // TEMPORARY: Destroy Object
-        Destroy(gameObject);
-    }
 }
