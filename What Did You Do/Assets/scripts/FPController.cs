@@ -145,7 +145,7 @@ public class FPController : MonoBehaviour
         //if (!attacking) return;
 
         attacking = false;
-        readyToAttack = true;
+        //readyToAttack = true;
     }
 
     //PLAYERHEALTH
