@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
@@ -24,6 +25,18 @@ public class FPController : MonoBehaviour
     private Vector2 lookInput;
     private Vector3 velocity;
     private float verticalRotation = 0f;
+
+    [Header("Pick Up Settings")] // refers to the input actions for picking up objects
+    public float pickupRange = 30f;
+    public Transform holdPoint;
+    private ItemPickUp heldObject;
+
+    [Header("Throw Settings")] // refers to the input actions for throwing objects
+    public float throwForce = 5f;
+    public float throwVelocity = 1.5f;
+
+    
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -79,26 +92,69 @@ public class FPController : MonoBehaviour
         }
     }
 
-   // public void OnRun(InputAction.CallbackContext context)
-   // {
-   //    if(context.performed) // Handle running logic
-   //    {
-    //       Run(); // Set the movement speed to the running speed
-   //    }
-      
-    //}
-   // private void Run()
-    //{
-      //  float currentTime = Time.time;
-       // if (currentTime - lastClickTime < doubleClickTime)
-       // {
-        //    moveSpeed = runSpeed; // Set the movement speed to the running speed
-       // }
-      //  else
-      //  {
-       //     moveSpeed = 5f; // Reset the movement speed to the walking speed
+    public void OnPickUp(InputAction.CallbackContext context) //Checks if there's an object that can be picked up/dropped
+    {
+        if (context.performed)
+            return;
+
+        if (heldObject == null)
+        {
+            Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        }
+
+        //if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+        //{
+        //    ItemPickUp pickUp = hit.collider.GetComponent<ItemPickUp>();
+        //    if (pickUp != null)
+        //    {
+        //        pickUp.PickUp(holdPoint);
+        //    }
         //}
-      //  lastClickTime = currentTime; // Update the last click time
-  //  }
+        //else
+        //{
+        //    heldObject.Drop();
+        //    heldObject = null;
+        //}
+
+    }
+
+    public void OnThrow(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            return;
+        if (heldObject == null)
+            return;
+
+        Vector3 dir = cameraTransform.forward;
+        Vector3 impulse = dir* throwForce + Vector3.up * throwVelocity;
+
+        heldObject.Throw(impulse);
+        heldObject = null;
+
+        Cursor.visible = true; //ensures that the mouse cursor is still visible on the screen after throwing the object.
+
+    }
+
+    // public void OnRun(InputAction.CallbackContext context)
+    // {
+    //    if(context.performed) // Handle running logic
+    //    {
+    //       Run(); // Set the movement speed to the running speed
+    //    }
+
+    //}
+    // private void Run()
+    //{
+    //  float currentTime = Time.time;
+    // if (currentTime - lastClickTime < doubleClickTime)
+    // {
+    //    moveSpeed = runSpeed; // Set the movement speed to the running speed
+    // }
+    //  else
+    //  {
+    //     moveSpeed = 5f; // Reset the movement speed to the walking speed
+    //}
+    //  lastClickTime = currentTime; // Update the last click time
+    //  }
 
 }
