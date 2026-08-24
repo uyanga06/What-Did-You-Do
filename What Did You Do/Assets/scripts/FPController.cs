@@ -92,13 +92,13 @@ public class FPController : MonoBehaviour
 
     //Pick Up:
     [Header("Pick Up Settings")] //initial values for picking up an object
-    public float pickupRange = 20f;
+    public float pickupRange = 30f;
     public Transform holdPoint;
     private ItemPickUp heldObject;
 
     [Header("Throw Settings")] //initial values for throwing the object
     public float throwForce = 5f;
-    public float throwVelocity = 1f;
+    public float throwVelocity = 1.5f;
 
     public void OnPickUp(InputAction.CallbackContext context) //checks if there is an object that can be picked up/dropped
     {
