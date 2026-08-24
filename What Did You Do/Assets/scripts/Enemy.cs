@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
-       //Check for sight and attack range
+       //Check for sight and attack range - of the player in terms of the enemy
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        //Walkpoint reached
+        //Reached the walk point 
         if (distanceToWalkPoint.magnitude < 1f)
             walkPointSet = false;
 
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
 
     private void SearchWalkPoint()
     {
-        //Calculate random point in range 
+        // random point in range calculations 
         float randomZ = Random.Range(-walkPointRange, walkPointRange);
         float randomX = Random.Range(-walkPointRange, walkPointRange);
 
@@ -84,14 +84,14 @@ public class Enemy : MonoBehaviour
 
     private void AttackPlayer()
     {
-        //Make sure enemy doesn't move
+        //Code to ensure enemy doesn't move
         agent.SetDestination(transform.position);
 
-        transform.LookAt(player);
+        transform.LookAt(player); //to look at player as enemy approaches player
 
         if (!alreadyAttacked)
         {
-           ///Attack code here
+           //Where my code for an attack should go
             
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
