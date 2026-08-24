@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     Animator animator;
     //AudioSource audioSource;
 
+    [SerializeField] PlayerHealth ph;
+
 
     [Header("Controller")]
     public float moveSpeed = 5;
@@ -223,4 +225,11 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("Enemy Hit");
     }
+
+    public void TakeDamage(int damage)
+    {
+        ph.TakeDamage(damage);
+        
+    }
+
 }
