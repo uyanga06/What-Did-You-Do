@@ -9,7 +9,7 @@ public class EnemyWeaponAttack : MonoBehaviour
     //public FPController player;
 
     [SerializeField] private float weaponHitRadius;
-    [SerializeField] private int damage = 2;
+    [SerializeField] private int damage = 20;
 
     [SerializeField] private LayerMask targetLayer;
 

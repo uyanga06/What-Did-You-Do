@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-
+    
 public class WeaponAttack : MonoBehaviour
 {
     //public FPController player;
@@ -23,10 +23,10 @@ public class WeaponAttack : MonoBehaviour
     //}
     private void Update()
     {
-        
+
 
         //DetectHit();
-        
+
     }
 
 
@@ -35,8 +35,8 @@ public class WeaponAttack : MonoBehaviour
         EnemyHealth enemy = other.GetComponentInParent<EnemyHealth>();
         if (enemy != null)
         {
-            enemy.TakeDamage(damage); 
-            
+            enemy.TakeDamage(damage);
+
             Debug.Log("Player weapon hit enemy!");
         }
     }
@@ -51,7 +51,7 @@ public class WeaponAttack : MonoBehaviour
 
     void Attack()
     {
-       Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers); //detects enemies in range
+        Collider[] hitEnemies = Physics.OverlapSphere(attackPoint.position, attackRange, enemyLayers); //detects enemies in range
 
         foreach (Collider enemy in hitEnemies)
         {
@@ -61,7 +61,7 @@ public class WeaponAttack : MonoBehaviour
             {
                 health.TakeDamage(damage);
             }
-            
+
             Debug.Log("We hit them!");
         }
 
@@ -94,3 +94,10 @@ public class WeaponAttack : MonoBehaviour
     //}
 
 }
+
+
+
+
+
+
+

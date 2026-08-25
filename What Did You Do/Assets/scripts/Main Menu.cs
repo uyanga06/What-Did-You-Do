@@ -9,14 +9,14 @@ public class MainMenu : MonoBehaviour
 {
     //UI buttons that will be used for main menu
     public Button playButton;
-    
+
     public Button exitButton;
 
     public void OnPlayClick()
     {
-       
+
         SceneManager.LoadScene("Main Scene");
-        
+
     }
 
     public void OnExitClick()
@@ -25,7 +25,7 @@ public class MainMenu : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
-       
+
 
     }
 
@@ -49,3 +49,5 @@ public class MainMenu : MonoBehaviour
 
 
 }
+
+

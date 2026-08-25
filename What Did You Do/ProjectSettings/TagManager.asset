@@ -4,9 +4,12 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Attack
-  - EnemyAttack
+  - SecretRoom
+  - Secret room
   - Enemy
+  - Attack
+  - Cauldron
+  - PickUp
   layers:
   - Default
   - TransparentFX
@@ -14,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
+  - Secret room
   - Player
   - Enemy
-  - Enemies
   - 
   - 
   - 

@@ -1,206 +1,68 @@
-
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine.UI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using System;
+using UnityEngine.Rendering;
+
+// Refertnce List:
+// Hayes, A. (2026). 'Week 2: First-person Character Controller'. [PowerPoint Presentation]. DIGA2001A - Digital Art Design Project, University of the Witwatersrand. Available at: https://ulwazi.wits.ac.za/courses/87753/files/11404021?module_item_id=1194555 (Accessed on 10 August 2026)
+// Hayes, A. (2026). 'Week 3:  First Person Character Controller & Mechanics'. [PowerPoint Presentation]. DIGA2001A -Digital Art Design Project, University of the Witwatersrand. Available at: https://ulwazi.wits.ac.za/courses/87753/files/11447217?module_item_id=1198514 (Accessed on 10 August 2026)
 public class FPController : MonoBehaviour
 {
-    ////MUNE
-    //Controls playerInput;
-    //Controls.PlayerActions input;
-
-    
-    //public Animator animator;
-    ////AudioSource audioSource;
-
-    
-
-
-    //public const string ATTACK1 = "Attack 1";
-    ////public const string ATTACK2 = "Attack 2";
-
-    //[Header("Attacking")]
-    //public float attackDistance = 3f;
-    //public float attackDelay = 0.4f;
-    //public float attackSpeed = 1f;
-    //public int attackDamage = 1;
-    //public Transform weaponPoint;
-    //public LayerMask attackLayer;
-
-
-    //bool attacking = false;
-    //bool readyToAttack = true;
-    //int attackCount;
-
-    //public float jumpHeight = 1.5f;
-
-    //[Header("Player Health")]
-    //int currentHealth;
-    //public int maxHealth;
-    CharacterController controller;
-    bool isGrounded;
-
-    //UYANGA
-
-    [Header("Walk Settings")] // refers to the input actions for walking. previously named Movement Settings
-    public float moveSpeed = 5f;
-    public float gravity = -9.81f;
+    [Header("Action Settings")] // refers to the input actions for walking, running and jumping. previously named Movement Settings
+    public float moveSpeed = 50f;
+    public float runSpeed = 15f;
+   //private const float doubleClickTime = 0.3f; // Time window for detecting double-click for running
+   // private float lastClickTime; // Time of the last click for running
+    public float gravity = -60f;
+    public float jumpHeight = 10f;
 
     [Header("Look Settings")] // refers to the input actions for looking around 
     public Transform cameraTransform;
     public float lookSensitivity = 2f;
     public float verticalLookLimit = 90f;
-    //private CharacterController controller;
+    private CharacterController controller;
     private Vector2 moveInput;
     private Vector2 lookInput;
     private Vector3 velocity;
     private float verticalRotation = 0f;
 
-    //U+M
+    [Header("Pick Up Settings")] // refers to the input actions for picking up objects
+    public float pickupRange = 30f;
+    public Transform holdPoint;
+    private ItemPickUp heldObject;
+
+    [Header("Throw Settings")] // refers to the input actions for throwing objects
+    public float throwForce = 5f;
+    public float throwVelocity = 1.5f;
+
+    
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        //animator = GetComponentInChildren<Animator>();
-        
-        //audioSource = GetComponent<AudioSource>();
-
-        //playerInput = new Controls();
-        //input = playerInput.Player;
-        ////AssignInputs();
-
-        //PLAYER HEALTH
-        //currentHealth = maxHealth;
     }
-
     private void Update()
     {
         HandleWalk(); //was HandleMovement
         HandleLook();
-
-        isGrounded = controller.isGrounded;
-
-        //SetAnimations();
     }
 
-    //MUNE - Animations
-    //private void OnEnable()
-    //{
-    //    playerInput?.Enable();
-    //}
-
-    //private void OnDisable()
-    //{
-    //    playerInput?.Disable();
-    //}
-
-   
-    //string currentAnimationState;
-
-    //public void ChangeAnimationState(string newState)
-    //{
-    //    // STOP THE SAME ANIMATION FROM INTERRUPTING WITH ITSELF //
-    //    if (currentAnimationState == newState) return;
-
-    //}
-
-    
-    //Attaking behaviour
-
-    //public void OnAttack(InputAction.CallbackContext context)
-    //{
-    //    if (context.performed)
-    //    {
-    //        Attack();
-
-    //        Debug.Log("ON ATTACK CALLED");
-    //        Debug.Log("LEFT CLICK DETECTED");
-
-    //    }
-    //}
-
-    //public void Attack()
-    //{
-    //    if (!readyToAttack || attacking) return;
-
-    //    readyToAttack = false;
-    //    attacking = true;
-
-    //    animator.SetTrigger("doAttack");
-    //    StartCoroutine(doAttack());
-
-    //    Debug.Log("Player attacked!");
-    //    //Debug.Log("Attacking");
-        
-    //    //StartCoroutine(doAttack());
-    //}
-
-    //void ResetAttack()
-    //{
-    //    //Debug.Log("===== RESET ATTACK CALLED =====");
-    //    //if (!attacking) return;
-
-    //    attacking = false;
-    //    readyToAttack = true;
-    //    return;
-    //}
-
-    //PLAYERHEALTH
-
-    
-    //public void TakeDamage(int amount)
-    //{
-    //    currentHealth -= amount;
-
-    //    if (currentHealth <= 0)
-    //    { Death(); }
-    //}
-
-    //void Death()
-    //{
-    //    // Death function
-    //    // TEMPORARY: Destroy Object
-    //    Destroy(gameObject);
-    //}
-
-
-
-
-
-
-
-
-    //UYANGA
+   // private Vector3 CalculateWorldDirection()
+  //  {
+   //     Vector3 inputDirection = new Vector3(playerInputHandler.MovementInput.x, 0f, playerInputHandler.MovementInput.y);
+   //     Vector3 worldDirection = transform.TransformDirection(inputDirection);
+    //    return worldDirection.normalized;
+  //  }
     public void OnWalk(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
-
     public void OnLook(InputAction.CallbackContext context)
     {
         lookInput = context.ReadValue<Vector2>();
     }
-
-    ////MUNE
-    //public void OnJump(InputAction.CallbackContext context)
-    //{
-    //   if (context.performed && controller.isGrounded)
-    //    {
-        
-    //        velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); // Calculates the upward speed needed for the player to reach the chosen jump height while accounting for gravity.
-          
-
-    //    }
-    //}
-
-    
-
-
     public void HandleWalk() //was HandleMovement
     {
         Vector3 move = transform.right * moveInput.x + transform.forward *
@@ -211,7 +73,6 @@ public class FPController : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
-
     public void HandleLook()
     {
         float mouseX = lookInput.x * lookSensitivity;
@@ -223,168 +84,77 @@ public class FPController : MonoBehaviour
         0f, 0f);
         transform.Rotate(Vector3.up * mouseX);
     }
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        if (context.performed && controller.isGrounded) // Check that the Jump action was successfully performed and that the player is currently standing on the ground.
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity); //Calculates the upward speed needed for the player to reach the chosen jump height while accounting for gravity.
+        }
+    }
 
-    //public IEnumerator doAttack()
-    //{
-    //    //Debug.Log("doAttack coroutine started");
-    //    Debug.Log("IEnumerator STARTED");
+    public void OnPickUp(InputAction.CallbackContext context) //Checks if there's an object that can be picked up/dropped
+    {
+        if (context.performed)
+            return;
 
-    //    if (!attacking) yield break;
-    //    animator.SetTrigger("doAttack");
+        if (heldObject == null)
+        {
+            Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
+        }
 
-    //    yield return new WaitForSeconds(1f);
+        //if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+        //{
+        //    ItemPickUp pickUp = hit.collider.GetComponent<ItemPickUp>();
+        //    if (pickUp != null)
+        //    {
+        //        pickUp.PickUp(holdPoint);
+        //    }
+        //}
+        //else
+        //{
+        //    heldObject.Drop();
+        //    heldObject = null;
+        //}
 
-    //    //Debug.Log("Returning to idle");
-    //    Debug.Log("IEnumerator REACHED RESET");
+    }
 
+    public void OnThrow(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            return;
+        if (heldObject == null)
+            return;
 
+        Vector3 dir = cameraTransform.forward;
+        Vector3 impulse = dir* throwForce + Vector3.up * throwVelocity;
 
-    //    //animator.SetTrigger("backToIdle");
+        heldObject.Throw(impulse);
+        heldObject = null;
 
-    //    if (attacking)
+        Cursor.visible = true; //ensures that the mouse cursor is still visible on the screen after throwing the object.
+
+    }
+
+    // public void OnRun(InputAction.CallbackContext context)
+    // {
+    //    if(context.performed) // Handle running logic
     //    {
-    //        animator.SetTrigger("backToIdle");
-    //        ResetAttack();
+    //       Run(); // Set the movement speed to the running speed
     //    }
 
-    //    //ResetAttack();
-
-    //    yield break;
-    //    //animator.SetTrigger("doAttack");
-
-    //    //yield return null;
-
-    //    //ResetAttack();
     //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //NOT WORKING 
-
-    //void AssignInputs()
+    // private void Run()
     //{
-    //    input.Attack.started += ctx => Attack();
-    //    //animator.Play(ATTACK1, 0, 0f);
-
-    //    Debug.Log("Player attacked!");
-
+    //  float currentTime = Time.time;
+    // if (currentTime - lastClickTime < doubleClickTime)
+    // {
+    //    moveSpeed = runSpeed; // Set the movement speed to the running speed
+    // }
+    //  else
+    //  {
+    //     moveSpeed = 5f; // Reset the movement speed to the walking speed
     //}
-
-
-    //if (attackCount == 0)
-    //{
-    //    ChangeAnimationState(ATTACK1);
-    //    attackCount++;
-    //}
-
-    //if (playerInput.Player.Attack.IsPressed())
-    //{
-    //    Attack();
-    //    Debug.Log("Attacking");
-    //    Debug.Log("Left Button Pressed");
-    //}
-
-
-    //void AttackRaycast()
-    //{
-    //    if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit, attackDistance, attackLayer))
-    //    {
-    //        HitTarget(hit.point);
-
-    //        if (hit.transform.TryGetComponent<Enemy>(out Enemy T))
-    //        { T.TakeDamage(attackDamage); }
-    //    }
-    //}
-
-    //void HitTarget(Vector3 pos)
-    //{
-    //    //audioSource.pitch = 1;
-    //    //audioSource.PlayOneShot(hitSound);
-
-    //    GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
-    //    Destroy(GO, 20);
-    //}
-
-    //Invoke(nameof(AttackRaycast), attackDelay);
-
-    //audioSource.pitch = Random.Range(0.9f, 1.1f);
-    // audioSource.PlayOneShot(swordSwing);
-
-    // Repeat Inputs
-    //if (input.Attack.IsPressed())
-    //{ Attack(); }
-
-
-    //// PLAY THE ANIMATION //
-    //currentAnimationState = newState;
-    //animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
-
-
-    //void SetAnimations()
-    //{
-    //    // If player is not attacking
-    //    if (!attacking)
-    //    {
-    //        if (velocity.x == 0 && velocity.z == 0)
-    //        { ChangeAnimationState(ATTACK1); }
-    //        //else
-    //        //{ ChangeAnimationState(WALK); }
-    //    }
-    //}
-
-    //public const string IDLE = "Idle";
-    //public const string WALK = "Walk";
-
-    //public GameObject hitEffect;
-    //public AudioClip swordSwing;
-    //public AudioClip hitSound;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //  lastClickTime = currentTime; // Update the last click time
+    //  }
 
 }

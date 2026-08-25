@@ -46,7 +46,7 @@ public class EnemyHealth : MonoBehaviour
             meshRenderer.material.color = defaultColor;
         }
 
-  
+
 
         //currentHealth -= amount;
         //slider.value = currentHealth;
@@ -59,8 +59,10 @@ public class EnemyHealth : MonoBehaviour
 
     }
 
-    
+
 
 
 
 }
+
+
