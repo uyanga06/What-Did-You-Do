@@ -32,8 +32,8 @@ public class Enemy : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     public bool alreadyAttacked;
-    [SerializeField] private float attackTime = 2f; //added now
-    [SerializeField] private float timeToAttack; //added now
+    //[SerializeField] private float attackTime = 2f; //added now
+    //[SerializeField] private float timeToAttack; //added now
 
     //Chasing added
     //[SerializeField] private float chaseRange;
@@ -76,7 +76,7 @@ public class Enemy : MonoBehaviour
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
 
         //added
-        float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
+        //float distanceToPlayer = Vector3.Distance(transform.position, player.transform.position);
 
 
         //if (distanceToPlayer > attackRange)
@@ -163,7 +163,7 @@ public class Enemy : MonoBehaviour
     {
         eh.TakeDamage(damage);
         //Health -= damage;
-        Debug.Log("Player damaged");
+        Debug.Log("Enemy damaged");
         //if (hHealth <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
     }
 

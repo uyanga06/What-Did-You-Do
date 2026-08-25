@@ -165,8 +165,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask attackLayer;
 
     public GameObject hitEffect;
-    public AudioClip swordSwing;
-    public AudioClip hitSound;
+    //public AudioClip swordSwing;
+    //public AudioClip hitSound;
 
     bool attacking = false;
     bool readyToAttack = true;
