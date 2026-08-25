@@ -31,14 +31,14 @@ public class PlayerController : MonoBehaviour
 
     float xRotation = 0f;
 
-    [Header("Pick Up Settings")] //initial values for picking up an object
-    public float pickupRange = 20f;
+    [Header("Pick Up")] //initial values for picking up an object
+    public float pickupRange = 40f;
     public Transform holdPoint;
     private ItemPickUp heldObject;
 
-    [Header("Throw Settings")] //initial values for throwing the object
+    [Header("Throw")] //initial values for throwing the object
     public float throwForce = 5f;
-    public float throwVelocity = 1f;
+    public float throwVelocity = 1.5f;
 
     void Awake()
     {
@@ -241,10 +241,10 @@ public class PlayerController : MonoBehaviour
     }
 
     //Pick Up:
-
-    public void OnPickUp(InputAction.CallbackContext context) //checks if there is an object that can be picked up/dropped
+    public void OnPickUp() //checks if there is an object that can be picked up/dropped
     {
-        if (!context.performed) return;
+
+        Debug.Log("OnPickUp called");
 
         if (heldObject == null)
         {
@@ -268,9 +268,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnThrow(InputAction.CallbackContext context) //checks if there is an object that can be thrown and then calculates the throw
+    public void OnThrow() //checks if there is an object that can be thrown and then calculates the throw
     {
-        if (!context.performed) return;
         if (heldObject == null) return;
 
         Vector3 dir = cam.transform.forward;

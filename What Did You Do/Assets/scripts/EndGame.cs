@@ -7,7 +7,7 @@ public class EndGame : MonoBehaviour
     {
         if (collision.gameObject.tag == "Cauldron") //checks for the correct collision to then transition to the endgame scene
         {
-            SceneManager.LoadScene("TransitionTest");
+            SceneManager.LoadScene("EndGame");
         }
     }
 }

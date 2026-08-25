@@ -9,19 +9,13 @@ public class SceneLoad : MonoBehaviour
     void Start()
     {
         QuitButton.onClick.AddListener(QuitGame);
-        Cursor.lockState = CursorLockMode.None; //allows the mouse cursor to move freely and not get locked atfer right-clicking to throw the object 
+        Cursor.lockState = CursorLockMode.None; //allows the mouse cursor to move freely and not get locked after right clicking to throw the object
     }
-
-    private void QuitGame()
+    private void QuitGame() // quits the game
     {
         Time.timeScale = 1f;
         Debug.Log("Quit Game");
         Application.Quit();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
+
