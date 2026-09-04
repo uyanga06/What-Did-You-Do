@@ -31,6 +31,15 @@ public class PlayerController : MonoBehaviour
 
     float xRotation = 0f;
 
+    [Header("Pick Up")] //initial values for picking up an object
+    public float pickupRange = 40f;
+    public Transform holdPoint;
+    private ItemPickUp heldObject;
+
+    [Header("Throw")] //initial values for throwing the object
+    public float throwForce = 5f;
+    public float throwVelocity = 1.5f;
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -156,8 +165,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask attackLayer;
 
     public GameObject hitEffect;
-    public AudioClip swordSwing;
-    public AudioClip hitSound;
+    //public AudioClip swordSwing;
+    //public AudioClip hitSound;
 
     bool attacking = false;
     bool readyToAttack = true;
@@ -229,6 +238,47 @@ public class PlayerController : MonoBehaviour
     {
         ph.TakeDamage(damage);
 
+    }
+
+    //Pick Up:
+    public void OnPickUp() //checks if there is an object that can be picked up/dropped
+    {
+
+        Debug.Log("OnPickUp called");
+
+        if (heldObject == null)
+        {
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+            {
+                ItemPickUp pickUp = hit.collider.GetComponent<ItemPickUp>();
+
+                if (pickUp != null)
+                {
+                    pickUp.PickUp(holdPoint);
+                    heldObject = pickUp;
+                }
+            }
+        }
+        else
+        {
+            heldObject.Drop();
+            heldObject = null;
+        }
+    }
+
+    public void OnThrow() //checks if there is an object that can be thrown and then calculates the throw
+    {
+        if (heldObject == null) return;
+
+        Vector3 dir = cam.transform.forward;
+        Vector3 impulse = dir * throwForce + Vector3.up * throwVelocity;
+
+        heldObject.Throw(impulse);
+        heldObject = null;
+
+        Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
     }
 
 }

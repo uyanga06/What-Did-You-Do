@@ -8,6 +8,8 @@ TagManager:
   - Secret room
   - Enemy
   - Attack
+  - Cauldron
+  - PickUp
   layers:
   - Default
   - TransparentFX
