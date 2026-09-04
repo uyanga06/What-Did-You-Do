@@ -11,10 +11,21 @@ public class SceneLoad : MonoBehaviour
         QuitButton.onClick.AddListener(QuitGame);
         Cursor.lockState = CursorLockMode.None; //allows the mouse cursor to move freely and not get locked after right clicking to throw the object
     }
-    private void QuitGame() // quits the game
+    public void QuitGame() // quits the game
     {
-        Time.timeScale = 1f;
-        Debug.Log("Quit Game");
+       
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
         Application.Quit();
+
+
+
+
+
+    //    Time.timeScale = 1f;
+    //    Debug.Log("Quit Game");
+    //    Application.Quit();
     }
 }
+

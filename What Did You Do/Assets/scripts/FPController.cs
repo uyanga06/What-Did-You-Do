@@ -1,15 +1,20 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+
+// Refertnce List:
+// Hayes, A. (2026). 'Week 2: First-person Character Controller'. [PowerPoint Presentation]. DIGA2001A - Digital Art Design Project, University of the Witwatersrand. Available at: https://ulwazi.wits.ac.za/courses/87753/files/11404021?module_item_id=1194555 (Accessed on 10 August 2026)
+// Hayes, A. (2026). 'Week 3:  First Person Character Controller & Mechanics'. [PowerPoint Presentation]. DIGA2001A -Digital Art Design Project, University of the Witwatersrand. Available at: https://ulwazi.wits.ac.za/courses/87753/files/11447217?module_item_id=1198514 (Accessed on 10 August 2026)
 public class FPController : MonoBehaviour
 {
     [Header("Action Settings")] // refers to the input actions for walking, running and jumping. previously named Movement Settings
-    public float moveSpeed = 5f;
-    public float runSpeed = 12f;
-    private const float doubleClickTime = 0.3f; // Time window for detecting double-click for running
-    private float lastClickTime; // Time of the last click for running
-    public float gravity = -9.81f;
-    public float jumpHeight = 2f;
+    public float moveSpeed = 50f;
+    public float runSpeed = 15f;
+   //private const float doubleClickTime = 0.3f; // Time window for detecting double-click for running
+   // private float lastClickTime; // Time of the last click for running
+    public float gravity = -60f;
+    public float jumpHeight = 10f;
 
     [Header("Look Settings")] // refers to the input actions for looking around 
     public Transform cameraTransform;
@@ -20,6 +25,18 @@ public class FPController : MonoBehaviour
     private Vector2 lookInput;
     private Vector3 velocity;
     private float verticalRotation = 0f;
+
+    [Header("Pick Up Settings")] // refers to the input actions for picking up objects
+    public float pickupRange = 30f;
+    public Transform holdPoint;
+    private ItemPickUp heldObject;
+
+    [Header("Throw Settings")] // refers to the input actions for throwing objects
+    public float throwForce = 5f;
+    public float throwVelocity = 1.5f;
+
+    
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -31,6 +48,13 @@ public class FPController : MonoBehaviour
         HandleWalk(); //was HandleMovement
         HandleLook();
     }
+
+   // private Vector3 CalculateWorldDirection()
+  //  {
+   //     Vector3 inputDirection = new Vector3(playerInputHandler.MovementInput.x, 0f, playerInputHandler.MovementInput.y);
+   //     Vector3 worldDirection = transform.TransformDirection(inputDirection);
+    //    return worldDirection.normalized;
+  //  }
     public void OnWalk(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
@@ -68,76 +92,69 @@ public class FPController : MonoBehaviour
         }
     }
 
-    public void OnRun(InputAction.CallbackContext context)
+    public void OnPickUp(InputAction.CallbackContext context) //Checks if there's an object that can be picked up/dropped
     {
-       if(context.performed) // Handle running logic
-       {
-           Run(); // Set the movement speed to the running speed
-       }
-      
-    }
-    private void Run()
-    {
-        float currentTime = Time.time;
-        if (currentTime - lastClickTime < doubleClickTime)
-        {
-            moveSpeed = runSpeed; // Set the movement speed to the running speed
-        }
-        else
-        {
-            moveSpeed = 5f; // Reset the movement speed to the walking speed
-        }
-        lastClickTime = currentTime; // Update the last click time
-    }
-
-    //Pick Up:
-    [Header("Pick Up Settings")] //initial values for picking up an object
-    public float pickupRange = 30f;
-    public Transform holdPoint;
-    private ItemPickUp heldObject;
-
-    [Header("Throw Settings")] //initial values for throwing the object
-    public float throwForce = 5f;
-    public float throwVelocity = 1.5f;
-
-    public void OnPickUp(InputAction.CallbackContext context) //checks if there is an object that can be picked up/dropped
-    {
-        if (!context.performed) return;
+        if (context.performed)
+            return;
 
         if (heldObject == null)
         {
             Ray ray = new Ray(cameraTransform.position, cameraTransform.forward);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
-            {
-                ItemPickUp pickUp = hit.collider.GetComponent<ItemPickUp>();
-
-                if (pickUp != null)
-                {
-                    pickUp.PickUp(holdPoint);
-                    heldObject = pickUp;
-                }
-            }
         }
-        else
-        {
-            heldObject.Drop();
-            heldObject = null;
-        }
+
+        //if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+        //{
+        //    ItemPickUp pickUp = hit.collider.GetComponent<ItemPickUp>();
+        //    if (pickUp != null)
+        //    {
+        //        pickUp.PickUp(holdPoint);
+        //    }
+        //}
+        //else
+        //{
+        //    heldObject.Drop();
+        //    heldObject = null;
+        //}
+
     }
 
-    public void OnThrow(InputAction.CallbackContext context) //checks if there is an object that can be thrown and then calculates the throw
+    public void OnThrow(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-        if (heldObject == null) return;
+        if (context.performed)
+            return;
+        if (heldObject == null)
+            return;
 
         Vector3 dir = cameraTransform.forward;
-        Vector3 impulse = dir * throwForce + Vector3.up * throwVelocity;
+        Vector3 impulse = dir* throwForce + Vector3.up * throwVelocity;
 
         heldObject.Throw(impulse);
         heldObject = null;
 
-        Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
+        Cursor.visible = true; //ensures that the mouse cursor is still visible on the screen after throwing the object.
+
     }
+
+    // public void OnRun(InputAction.CallbackContext context)
+    // {
+    //    if(context.performed) // Handle running logic
+    //    {
+    //       Run(); // Set the movement speed to the running speed
+    //    }
+
+    //}
+    // private void Run()
+    //{
+    //  float currentTime = Time.time;
+    // if (currentTime - lastClickTime < doubleClickTime)
+    // {
+    //    moveSpeed = runSpeed; // Set the movement speed to the running speed
+    // }
+    //  else
+    //  {
+    //     moveSpeed = 5f; // Reset the movement speed to the walking speed
+    //}
+    //  lastClickTime = currentTime; // Update the last click time
+    //  }
 
 }

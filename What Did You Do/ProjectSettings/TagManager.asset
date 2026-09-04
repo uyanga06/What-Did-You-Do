@@ -4,6 +4,10 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - SecretRoom
+  - Secret room
+  - Enemy
+  - Attack
   - Cauldron
   - PickUp
   layers:
@@ -13,9 +17,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Secret room
+  - Player
+  - Enemy
   - 
   - 
   - 

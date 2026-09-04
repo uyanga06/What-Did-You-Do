@@ -1,20 +1,19 @@
 using UnityEngine;
-using static UnityEditor.Progress;
 
 public class ItemPickUp : MonoBehaviour
 {
     private Rigidbody rb;
-    public GameObject DropPrompt;
-    public GameObject ThrowPrompt;
-    public GameObject PickUpPrompt;
+    //public GameObject DropPrompt;
+    //public GameObject ThrowPrompt;
+    //public GameObject PickUpPrompt;
 
 
-    void Start() //setup for the prompts that will be initially shown to the player 
+    /*void Start() //setup for the prompts that will be initially shown to the player 
     {
         PickUpPrompt.SetActive(true);
         DropPrompt.SetActive(false);
         ThrowPrompt.SetActive(false);
-    }
+    }*/
 
     void Awake()
     {
@@ -31,9 +30,9 @@ public class ItemPickUp : MonoBehaviour
         transform.SetParent(holdPoint);
         transform.localPosition = Vector3.zero;
 
-        DropPrompt.SetActive(true);
-        ThrowPrompt.SetActive(true);
-        PickUpPrompt.SetActive(false);
+        //DropPrompt.SetActive(true);
+        //ThrowPrompt.SetActive(true);
+        //PickUpPrompt.SetActive(false);
     }
 
     public void Drop() //physics activate again, allowing for the object to be detached from the hold point 
@@ -41,9 +40,9 @@ public class ItemPickUp : MonoBehaviour
         rb.useGravity = true;
         transform.SetParent(null);
 
-        DropPrompt.SetActive(false);
-        ThrowPrompt.SetActive(false);
-        PickUpPrompt.SetActive(true);
+        //DropPrompt.SetActive(false);
+        //ThrowPrompt.SetActive(false);
+        //PickUpPrompt.SetActive(true);
     }
 
     public void MoveToHoldPoint(Vector3 targetPosition)
@@ -59,9 +58,11 @@ public class ItemPickUp : MonoBehaviour
         rb.angularVelocity = Vector3.zero;
         rb.AddForce(impulse, ForceMode.Impulse);
 
-        DropPrompt.SetActive(false);
-        ThrowPrompt.SetActive(false);
-        PickUpPrompt.SetActive(true);
+        //DropPrompt.SetActive(false);
+        //ThrowPrompt.SetActive(false);
+        //PickUpPrompt.SetActive(true);
 
     }
 }
+
+

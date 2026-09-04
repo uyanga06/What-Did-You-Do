@@ -5,9 +5,24 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PrincessLab.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: bdb4387edc870cb45b4156f777d3dd7e
+  - enabled: 1
+    path: Assets/Scenes/Main Scene.unity
+    guid: 5384a191e6aaefe49b4f1bf26462e117
+  - enabled: 1
+    path: Assets/Scenes/SecretRoom.unity
+    guid: c8844b9cd328c47459411a4019d16d32
+  - enabled: 0
+    path: Assets/Scenes/EndScene.unity
+    guid: 6501054b7cdb0ea4f8b0e82f7730c8dc
+  - enabled: 1
+    path: Assets/Scenes/EndGame.unity
+    guid: 5186abe6209e3834fa9dc15fd426b944
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
