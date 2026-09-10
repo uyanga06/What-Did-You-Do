@@ -5,16 +5,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using static Unity.VisualScripting.Member;
 
-public class NPC : MonoBehaviour, IInteractable
+public class ObjectDialogue : MonoBehaviour, IInteractable
 {
-    public NPCDialogue dialogueData;
+    public NPCSystem dialogueData;
     public GameObject dialoguePanel;
-    public Text dialogueText, nameText;
-    public Image portraitImage;
+    public TMP_Text dialogueText, nameText;
+    // public Image portraitImage;
     AudioSource source;
 
     private int dialogueIndex;
@@ -55,7 +56,7 @@ public class NPC : MonoBehaviour, IInteractable
         dialogueIndex = 0;
 
         nameText.text = dialogueData.npcName;
-        portraitImage.sprite = dialogueData.npcPortrait;
+        //portraitImage.sprite = dialogueData.npcPortrait;
 
         dialoguePanel.SetActive(true);
        // PauseController.SetPause(true);
@@ -111,7 +112,7 @@ public class NPC : MonoBehaviour, IInteractable
 
         if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
         {
-            yield return new WaitForSeconds(dialogueData.autoProgressDisplay);
+            yield return new WaitForSeconds(dialogueData.autoProgressDelay);
             NextLine();
         }
 
