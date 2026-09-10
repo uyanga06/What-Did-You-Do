@@ -52,7 +52,7 @@ public class NPC : MonoBehaviour, IInteractable
 
         }
     }
-  
+
 
 
 
@@ -67,7 +67,7 @@ public class NPC : MonoBehaviour, IInteractable
     {
         //if there is no dialogue data or the dialogue is inactive, return
         if ((dialogueData == null || !isDialogueActive))
-        return; 
+            return;
 
         if (isDialogueActive)
         {
@@ -127,10 +127,10 @@ public class NPC : MonoBehaviour, IInteractable
         }
 
         isTyping = false;
-        
-        if(dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
+
+        if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
         {
-           // yield return new WaitForSeconds(dialogueData.autoProgressDelay);
+            // yield return new WaitForSeconds(dialogueData.autoProgressDelay);
             NextLine(); //DisplayNextLine();
         }
 
@@ -155,7 +155,7 @@ public class NPC : MonoBehaviour, IInteractable
             dialoguePanel.SetActive(false);
         }
         if (currentText == dialoguePanel) //only hide if this is still active text
-       {
+        {
             currentText = null;
         }
     }
