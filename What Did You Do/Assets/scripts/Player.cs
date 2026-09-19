@@ -7,28 +7,22 @@ public class PlayerController : MonoBehaviour
 {
     Controls playerInput;
     Controls.PlayerActions input;
-
-
     CharacterController controller;
     Animator animator;
     //AudioSource audioSource;
 
     [SerializeField] PlayerHealth ph;
 
-
     [Header("Controller")]
     public float moveSpeed = 5;
     public float gravity = -9.8f;
     public float jumpHeight = 1.2f;
-
     Vector3 _PlayerVelocity;
-
     bool isGrounded;
 
     [Header("Camera")]
     public Camera cam;
     public float sensitivity;
-
     float xRotation = 0f;
 
     [Header("Pick Up")] //initial values for picking up an object
@@ -58,14 +52,19 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = controller.isGrounded;
 
-        // Repeat Inputs
+        MoveInput(input.Movement.ReadValue<Vector2>()); //Takes the player's movement input
+        LookInput(input.Look.ReadValue<Vector2>()); //Takes the player's camera input
+
+        //Repeats inputs
         if (input.Attack.IsPressed())
-        { Attack(); }
+        {
+            Attack();
+        }
 
         SetAnimations();
     }
 
-    void FixedUpdate()
+    /*void FixedUpdate()
     { MoveInput(input.Movement.ReadValue<Vector2>()); }
 
     void LateUpdate()
@@ -81,6 +80,28 @@ public class PlayerController : MonoBehaviour
         _PlayerVelocity.y += gravity * Time.deltaTime;
         if (isGrounded && _PlayerVelocity.y < 0)
             _PlayerVelocity.y = -2f;
+        controller.Move(_PlayerVelocity * Time.deltaTime);
+    }*/
+
+    void MoveInput(Vector2 input)
+    {
+        Vector3 move = new Vector3(input.x, 0f, input.y); //Creates direction of movement
+        move = transform.TransformDirection(move); //Player movement that follows the player's direction 
+        move *= moveSpeed; //Speed of movement of the player based on moveSpeed
+
+        //moves the player 
+        controller.Move(move * Time.deltaTime);
+
+        //keeps the player grounded
+        if (controller.isGrounded && _PlayerVelocity.y < 0)
+        {
+            _PlayerVelocity.y = -2f;
+        }
+
+        //gravity runs every frame
+        _PlayerVelocity.y += gravity * Time.deltaTime;
+
+        //applies vertical movement for jumping or falling
         controller.Move(_PlayerVelocity * Time.deltaTime);
     }
 
@@ -107,16 +128,8 @@ public class PlayerController : MonoBehaviour
         input.Disable();
     }
 
-    void Jump()
-    {
-        // Adds force to the player rigidbody to jump
-        if (isGrounded)
-            _PlayerVelocity.y = Mathf.Sqrt(jumpHeight * -3.0f * gravity);
-    }
-
     void AssignInputs()
     {
-        input.Jump.performed += ctx => Jump();
         input.Attack.started += ctx => Attack();
     }
 
@@ -128,7 +141,6 @@ public class PlayerController : MonoBehaviour
     public const string WALK = "Walk";
     public const string ATTACK1 = "Attack 1";
     public const string ATTACK2 = "Attack 2";
-
     string currentAnimationState;
 
     public void ChangeAnimationState(string newState)
@@ -146,10 +158,18 @@ public class PlayerController : MonoBehaviour
         // If player is not attacking
         if (!attacking)
         {
-            if (_PlayerVelocity.x == 0 && _PlayerVelocity.z == 0)
-            { ChangeAnimationState(IDLE); }
+            //Gets the direction of the player
+            Vector2 movement = input.Movement.ReadValue<Vector2>();
+
+            //Checks if there is movement or not
+            if (movement.sqrMagnitude < 0.01f)
+            {
+                ChangeAnimationState(IDLE);
+            }
             else
-            { ChangeAnimationState(WALK); }
+            {
+                ChangeAnimationState(WALK);
+            }
         }
     }
 
@@ -198,7 +218,6 @@ public class PlayerController : MonoBehaviour
             ChangeAnimationState(ATTACK2);
             attackCount = 0;
         }
-
 
     }
 
@@ -252,7 +271,7 @@ public class PlayerController : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
             {
-                ItemPickUp pickUp = hit.collider.GetComponent<ItemPickUp>();
+                ItemPickUp pickUp = hit.collider.GetComponentInParent<ItemPickUp>();
 
                 if (pickUp != null)
                 {
@@ -282,10 +301,3 @@ public class PlayerController : MonoBehaviour
     }
 
 }
-
-
-
-
-
-
-
