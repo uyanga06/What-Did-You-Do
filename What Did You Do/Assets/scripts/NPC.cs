@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.ProBuilder.MeshOperations;
 using UnityEngine.UI;
 // Reference List:
@@ -21,7 +22,7 @@ public class NPC : MonoBehaviour, IInteractable
 
     private bool hasPlayed = false;
 
-    private void Start()
+    public void Start()
     {
         dialoguePanel.SetActive(false);
     }
@@ -65,6 +66,7 @@ public class NPC : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        
         //if there is no dialogue data or the dialogue is inactive, return
         if ((dialogueData == null || !isDialogueActive))
             return;
@@ -88,6 +90,7 @@ public class NPC : MonoBehaviour, IInteractable
         nameText.SetText(dialogueData.npcName);
 
         dialoguePanel.SetActive(true);
+        
         //PauseController.SetPause(true);
 
         StartCoroutine(TypeLIne()); //Start typing the first line of dialogue

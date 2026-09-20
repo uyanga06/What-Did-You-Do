@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WeaponAttack : MonoBehaviour
 {
     //public FPController player;
-
+    public GameObject dialoguePanel;
     [SerializeField] private float weaponHitRadius;
     [SerializeField] private int damage = 2;
 
@@ -43,7 +43,7 @@ public class WeaponAttack : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (context.performed) //if left mouse button is pressed, invoke attack
+        if (dialoguePanel == null && context.performed) //if left mouse button is pressed and dialogue is not open, invoke attack
         {
             Attack();
         }
