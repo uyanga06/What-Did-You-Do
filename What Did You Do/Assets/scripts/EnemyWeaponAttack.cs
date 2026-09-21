@@ -24,15 +24,16 @@ public class EnemyWeaponAttack : MonoBehaviour
 
     }
 
+    
 
     private void OnTriggerEnter(Collider other)
     {
         PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
         if (player != null)
         {
-            player.TakeDamage(damage);
+            player.PlayerTakeDamage(damage);
 
-            Debug.Log("Player weapon hit enemy!");
+            Debug.Log("Enemy deal damage to player!");
         }
     }
 
@@ -54,7 +55,7 @@ public class EnemyWeaponAttack : MonoBehaviour
 
             if (health != null)
             {
-                health.TakeDamage(damage);
+                health.PlayerTakeDamage(damage);
             }
 
             Debug.Log("We hit them!");

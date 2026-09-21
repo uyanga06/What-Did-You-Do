@@ -21,13 +21,13 @@ public class PlayerHealth : MonoBehaviour
         slider.maxValue = currentHealth;
         slider.value = currentHealth;
 
-        meshRenderer = GetComponentInChildren<MeshRenderer>();
-        defaultColor = meshRenderer.material.color;
+        //meshRenderer = GetComponentInChildren<MeshRenderer>();
+        //defaultColor = meshRenderer.material.color;
     }
 
-    public void TakeDamage(int damage)
+    public void PlayerTakeDamage(int damage)
     {
-        Debug.Log("Player took " + damage + " damage!");
+       // Debug.Log("Player took damage");
 
         currentHealth -= damage;
 
@@ -39,13 +39,13 @@ public class PlayerHealth : MonoBehaviour
             return;
         }
 
-        StartCoroutine(HitEffect());
-        IEnumerator HitEffect()
-        {
-            meshRenderer.material.color = Color.white * 2f;
-            yield return new WaitForSeconds(blinkDuration);
-            meshRenderer.material.color = defaultColor;
-        }
+        //StartCoroutine(HitEffect());
+        //IEnumerator HitEffect()
+        //{
+        //    meshRenderer.material.color = Color.white * 2f;
+        //    yield return new WaitForSeconds(blinkDuration);
+        //    meshRenderer.material.color = defaultColor;
+        //}
 
 
 

@@ -64,24 +64,7 @@ public class PlayerController : MonoBehaviour
         SetAnimations();
     }
 
-    /*void FixedUpdate()
-    { MoveInput(input.Movement.ReadValue<Vector2>()); }
-
-    void LateUpdate()
-    { LookInput(input.Look.ReadValue<Vector2>()); }
-
-    void MoveInput(Vector2 input)
-    {
-        Vector3 moveDirection = Vector3.zero;
-        moveDirection.x = input.x;
-        moveDirection.z = input.y;
-
-        controller.Move(transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime);
-        _PlayerVelocity.y += gravity * Time.deltaTime;
-        if (isGrounded && _PlayerVelocity.y < 0)
-            _PlayerVelocity.y = -2f;
-        controller.Move(_PlayerVelocity * Time.deltaTime);
-    }*/
+   
 
     void MoveInput(Vector2 input)
     {
@@ -247,15 +230,15 @@ public class PlayerController : MonoBehaviour
         //audioSource.pitch = 1;
         //audioSource.PlayOneShot(hitSound);
 
-        GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
-        Destroy(GO, 20);
+        //GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
+        //Destroy(GO, 20);
 
         Debug.Log("Enemy Hit");
     }
 
-    public void TakeDamage(int damage)
+    public void PlayerTakeDamage(int damage)
     {
-        ph.TakeDamage(damage);
+        ph.PlayerTakeDamage(damage);
 
     }
 
@@ -300,4 +283,25 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
     }
 
+
+
 }
+
+/*void FixedUpdate()
+   { MoveInput(input.Movement.ReadValue<Vector2>()); }
+
+   void LateUpdate()
+   { LookInput(input.Look.ReadValue<Vector2>()); }
+
+   void MoveInput(Vector2 input)
+   {
+       Vector3 moveDirection = Vector3.zero;
+       moveDirection.x = input.x;
+       moveDirection.z = input.y;
+
+       controller.Move(transform.TransformDirection(moveDirection) * moveSpeed * Time.deltaTime);
+       _PlayerVelocity.y += gravity * Time.deltaTime;
+       if (isGrounded && _PlayerVelocity.y < 0)
+           _PlayerVelocity.y = -2f;
+       controller.Move(_PlayerVelocity * Time.deltaTime);
+   }*/

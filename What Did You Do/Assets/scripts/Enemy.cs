@@ -139,11 +139,12 @@ public class Enemy : MonoBehaviour
 
         transform.LookAt(player); //to look at player as enemy approaches player
 
-        Debug.Log("Player Attacked");
+       
 
         if (!alreadyAttacked)
         {
             //Where my code for an attack should go
+            Debug.Log("Player Attacked");
 
             alreadyAttacked = true;
             Invoke(nameof(ResetAttack), timeBetweenAttacks);
@@ -156,14 +157,14 @@ public class Enemy : MonoBehaviour
     {
         alreadyAttacked = false;
 
-        Debug.Log("Player attacked");
+        //Debug.Log("Player attacked");
     }
 
     public void TakeDamage(int damage)
     {
         eh.TakeDamage(damage);
         //Health -= damage;
-        Debug.Log("Enemy damaged");
+        //Debug.Log("Enemy damaged");
         //if (hHealth <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
     }
 
