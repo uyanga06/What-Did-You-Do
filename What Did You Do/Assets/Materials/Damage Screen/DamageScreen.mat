@@ -45,7 +45,7 @@ Material:
     - _ScreenIntensity: 0
     - _ScreenPower: 2.5
     m_Colors:
-    - MaskOffset: {r: 0, g: 5.128781, b: 0, a: 0}
+    - MaskOffset: {r: 0, g: 11.690436, b: 0, a: 0}
     - _Color: {r: 0.8113208, g: 0.033167057, b: 0.033167057, a: 1}
     - _MaskOffset: {r: 0, g: 0, b: 0, a: 0}
     - _Tiling: {r: 0, g: 0, b: 0, a: 0}
