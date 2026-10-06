@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using Unity.VisualScripting;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,7 +11,6 @@ public class PlayerController : MonoBehaviour
     Controls.PlayerActions input;
     CharacterController controller;
     Animator animator;
-    //AudioSource audioSource;
 
     [SerializeField] PlayerHealth ph;
 
@@ -29,23 +30,29 @@ public class PlayerController : MonoBehaviour
     public float pickupRange = 40f;
     public Transform holdPoint;
     private ItemPickUp heldObject;
+    public TMP_Text pickupText;
 
     [Header("Throw")] //initial values for throwing the object
     public float throwForce = 5f;
     public float throwVelocity = 1.5f;
 
+    [Header("Audio")]
+    AudioSource audioSource;
+    //[SerializeField] private AudioSource walking;
+
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
-        //audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
 
         playerInput = new Controls();
         input = playerInput.Player;
         AssignInputs();
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        Cursor.visible = false; 
     }
 
     void Update()
@@ -62,10 +69,25 @@ public class PlayerController : MonoBehaviour
         }
 
         SetAnimations();
+
+        if (heldObject != null)
+        {
+            heldObject.MoveToHoldPoint(holdPoint.position);
+        }
+
+        Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+        if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
+        {
+            ItemPickUp pickUp = hit.collider.GetComponent<ItemPickUp>();
+            if (pickUp != null)
+            {
+                pickupText.text = pickUp.gameObject.name;
+                return;
+            }
+        }
+
+        pickupText.text = "";
     }
-
-   
-
     void MoveInput(Vector2 input)
     {
         Vector3 move = new Vector3(input.x, 0f, input.y); //Creates direction of movement
@@ -104,10 +126,16 @@ public class PlayerController : MonoBehaviour
     void OnEnable()
     {
         input.Enable();
+
+        input.PickUp.performed += OnPickUp;
+        input.Throw.performed += OnThrow;
     }
 
     void OnDisable()
     {
+        input.PickUp.performed -= OnPickUp;
+        input.Throw.performed -= OnThrow;
+
         input.Disable();
     }
 
@@ -168,8 +196,8 @@ public class PlayerController : MonoBehaviour
     public LayerMask attackLayer;
 
     public GameObject hitEffect;
-    //public AudioClip swordSwing;
-    //public AudioClip hitSound;
+    public AudioClip swordSwing;
+    public AudioClip hitSound;
 
     bool attacking = false;
     bool readyToAttack = true;
@@ -188,8 +216,8 @@ public class PlayerController : MonoBehaviour
 
         //Debug.Log("Attacking Enemy");
 
-        //audioSource.pitch = Random.Range(0.9f, 1.1f);
-        //audioSource.PlayOneShot(swordSwing);
+        audioSource.pitch = Random.Range(0.9f, 1.1f);
+        audioSource.PlayOneShot(swordSwing);
 
         if (attackCount == 0)
         {
@@ -227,8 +255,8 @@ public class PlayerController : MonoBehaviour
 
     void HitTarget(Vector3 pos)
     {
-        //audioSource.pitch = 1;
-        //audioSource.PlayOneShot(hitSound);
+        audioSource.pitch = 1;
+        audioSource.PlayOneShot(hitSound);
 
         //GameObject GO = Instantiate(hitEffect, pos, Quaternion.identity);
         //Destroy(GO, 20);
@@ -243,10 +271,10 @@ public class PlayerController : MonoBehaviour
     }
 
     //Pick Up:
-    public void OnPickUp() //checks if there is an object that can be picked up/dropped
+    public void OnPickUp(InputAction.CallbackContext context) //checks if there is an object that can be picked up/dropped
     {
 
-        //Debug.Log("OnPickUp called");
+        if (!context.performed) return; // pressing the E key or button on a controller 
 
         if (heldObject == null)
         {
@@ -270,8 +298,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void OnThrow() //checks if there is an object that can be thrown and then calculates the throw
+    public void OnThrow(InputAction.CallbackContext context) //checks if there is an object that can be thrown and then calculates the throw
     {
+        if (!context.performed) return;
         if (heldObject == null) return;
 
         Vector3 dir = cam.transform.forward;
@@ -282,8 +311,6 @@ public class PlayerController : MonoBehaviour
 
         Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
     }
-
-
 
 }
 
