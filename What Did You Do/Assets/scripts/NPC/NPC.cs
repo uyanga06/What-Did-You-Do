@@ -14,44 +14,54 @@ public class NPC : MonoBehaviour, IInteractable
     public NPCSystem dialogueData;
     public GameObject dialoguePanel;
     public TMP_Text dialogueText, nameText;
+    private Rigidbody rb;
+    
 
     private int dialogueIndex;
     private bool isTyping, isDialogueActive;
 
     private static GameObject currentText; //tracks which text is active
 
-    private bool hasPlayed = false;
+   // private bool hasPlayed = false;
 
     public void Start()
     {
         dialoguePanel.SetActive(false);
+        
+    }
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+
     }
 
     private void OnTriggerEnter(Collider other) //when player enters the trigger zone, show the dialogue panel
     {
-        if (hasPlayed)
-        {
-            return;
-        }
-        if (other.CompareTag("Player"))
-        {
-            hasPlayed = true;
+    //    if (hasPlayed)
+    //    {
+    //        return;
+    //    }
+    //   if (other.CompareTag("Player"))
+    //    {
+    //        hasPlayed = true;
 
-            if (currentText != null && currentText != dialoguePanel)
-            {
-                currentText.SetActive(false);
-            }
+    //        if (currentText != null && currentText != dialoguePanel)
+    //        {
+    //            currentText.SetActive(false);
+    //        }
 
-            if (dialoguePanel != null) //safety scheck
-            {
-                dialoguePanel.SetActive(true); //show this text
-                currentText = dialoguePanel; //update current text reference
-                StartCoroutine(HideTextAfterDelay()); // start timer to hide it
+    //        if (dialoguePanel != null) //safety scheck
+    //        {
+    //          InteractionIcon.SetActive(true); //show the interaction icon
+    //           // dialoguePanel.SetActive(true); //show this text
+    //           // currentText = dialoguePanel; //update current text reference
+    //           // StartCoroutine(HideTextAfterDelay()); // start timer to hide it
 
-                // Destroy(textObject, 3f);
-            }
+    //            // Destroy(textObject, 3f);
+    //        }
 
-        }
+     //   }
     }
 
 
@@ -82,7 +92,7 @@ public class NPC : MonoBehaviour, IInteractable
 
     }
 
-    void StartDialogue()
+   public void StartDialogue()
     {
         isDialogueActive = true;
         dialogueIndex = 0;
@@ -90,7 +100,8 @@ public class NPC : MonoBehaviour, IInteractable
         nameText.SetText(dialogueData.npcName);
 
         dialoguePanel.SetActive(true);
-        
+       
+
         //PauseController.SetPause(true);
 
         StartCoroutine(TypeLIne()); //Start typing the first line of dialogue
@@ -149,18 +160,18 @@ public class NPC : MonoBehaviour, IInteractable
 
 
     }
-    private IEnumerator HideTextAfterDelay() //hides dialogue panel after 10 seconds
-    {
-        yield return new WaitForSeconds(10f);
+    //private IEnumerator HideTextAfterDelay() //hides dialogue panel after 10 seconds
+    //{
+    //    yield return new WaitForSeconds(10f);
 
-        if (dialoguePanel != null) // safety check
-        {
-            dialoguePanel.SetActive(false);
-        }
-        if (currentText == dialoguePanel) //only hide if this is still active text
-        {
-            currentText = null;
-        }
-    }
+    //    if (dialoguePanel != null) // safety check
+    //    {
+    //        dialoguePanel.SetActive(false);
+    //    }
+    //    if (currentText == dialoguePanel) //only hide if this is still active text
+    //    {
+    //        currentText = null;
+    //    }
+    //}
 
 }

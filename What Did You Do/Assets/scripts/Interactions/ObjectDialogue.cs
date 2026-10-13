@@ -2,143 +2,69 @@
 //Author: Game Code Library
 //Date: 23 February 2025
 //Code Version: Unity 2022.3.20f1 LTS
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
+
 using UnityEngine;
-using UnityEngine.UI;
-using static Unity.VisualScripting.Member;
 
-public class ObjectDialogue : MonoBehaviour, IInteractable
+public class ObjectDialogue : MonoBehaviour
 {
-    public NPCSystem dialogueData;
-    public GameObject dialoguePanel;
-    public TMP_Text dialogueText, nameText;
-    // public Image portraitImage;
-    AudioSource source;
+    public GameObject InteractionIcon;
+    //public GameObject Panel;
 
-    private int dialogueIndex;
-    private bool isTyping, isDialogueActive;
+    public NPC currentNPC;
 
-    void Awake()
+
+    public void Start()
     {
-        source = GetComponent<AudioSource>();
-    }
-
-    public bool CanInteract()
-    {
-        return !isDialogueActive;
-    }
-
-
-    public void Interact()
-    {
-        //If no dialogue data or if the game is paused and no dialogue is active
-        if (dialogueData == null || ( !isDialogueActive)) //PauseController.IsGamePaused will be added later
-            return;
-
-        if (isDialogueActive) //displays next line of text
+        if (InteractionIcon != null)
         {
-            NextLine();
-        }
-        else
-        {
-            StartDialogue();
+            InteractionIcon.SetActive(false);
         }
 
     }
 
-    public void StartDialogue()
+    //public void Update()
+    //{
+
+    public void OnInteract(InputAction.CallbackContext context)
     {
-        //source = GetComponent<AudioSource>();
-        isDialogueActive = true;
-        dialogueIndex = 0;
-
-        nameText.text = dialogueData.npcName;
-        //portraitImage.sprite = dialogueData.npcPortrait;
-
-        dialoguePanel.SetActive(true);
-       // PauseController.SetPause(true);
-
-        StartCoroutine(TypeLine());
-
-    }
-
-
-    void NextLine()
-    {
-
-        if (isTyping)
+        if (!context.performed) return;
+        if (currentNPC != null)
         {
-            StopAllCoroutines();
-            dialogueText.text = dialogueData.dialogueLines[dialogueIndex];
-            isTyping = false;
-        }
-        else if (++dialogueIndex < dialogueData.dialogueLines.Length)
-        {
-
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
-            EndDialogue();
-
+            currentNPC.StartDialogue();
+            Debug.Log("Interaction Happened");
         }
     }
 
+    //}
 
-    IEnumerator TypeLine()
+    private void OnTriggerEnter(Collider other) //triggers interaction icon to show when in range with an interactable object
     {
-        isTyping = true;
-        dialogueText.text = "";
-        if (!source.isPlaying)
+        NPC npc = other.GetComponent<NPC>(); //checks if there is an interactable script on the object
+        if (npc != null)
         {
-            source.Play(); //play type sound
+            currentNPC = npc;
+            InteractionIcon.SetActive(true); //once object is in range, icon will show above player
+            
         }
 
-
-
-
-
-        foreach (char letter in dialogueData.dialogueLines[dialogueIndex])
-        {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(dialogueData.typingSpeed); //Dialogue text speed, types out every letter at a specific rate
-
-        }
-
-        isTyping = false; //Dialogue line is complete
-
-        if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
-        {
-            yield return new WaitForSeconds(dialogueData.autoProgressDelay);
-            NextLine();
-        }
 
     }
 
-
-    public void EndDialogue() //The end dialogue button to exit dialogue
+    private void OnTriggerExit(Collider other)
     {
-        StopAllCoroutines();
-        isDialogueActive = false;
-        dialogueText.text = "";
-        if (dialoguePanel != null)
+        NPC npc = other.GetComponent<NPC>();
+        if (npc != null && npc == currentNPC) //checks if the interactble is the same one that is in range
         {
-            dialoguePanel.SetActive(false);
-        }
-
-        if (source.isPlaying)
-        {
-            if (source != null) // check it exists
+            if (InteractionIcon != null)
             {
-                source.Stop(); //stop typing sound
+                InteractionIcon.SetActive(false); //once object is out of range, the icon will disappear
+
             }
 
+            npc.EndDialogue();
+
+            currentNPC = null;
         }
-
-
     }
 
 }

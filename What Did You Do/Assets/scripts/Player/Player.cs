@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     Controls.PlayerActions input;
     CharacterController controller;
     Animator animator;
+   
+    
 
     [SerializeField] PlayerHealth ph;
 
@@ -52,11 +54,13 @@ public class PlayerController : MonoBehaviour
         AssignInputs();
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; 
+        Cursor.visible = false;
+        
     }
 
     void Update()
     {
+        
         isGrounded = controller.isGrounded;
 
         MoveInput(input.Movement.ReadValue<Vector2>()); //Takes the player's movement input
@@ -87,6 +91,7 @@ public class PlayerController : MonoBehaviour
         }
 
         pickupText.text = "";
+
     }
     void MoveInput(Vector2 input)
     {
@@ -311,6 +316,16 @@ public class PlayerController : MonoBehaviour
 
         Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
     }
+
+   //public void OnInteract(InputAction.CallbackContext context)
+   // {
+   //     if (!context.performed) return;
+   //     if (currentNPC != null)
+   //     {
+   //         currentNPC.StartDialogue();
+   //         Debug.Log("Interaction Happened");
+   //     }
+   // }
 
 }
 
