@@ -11,11 +11,20 @@ public class PlayerHealth : MonoBehaviour
     private MeshRenderer meshRenderer;
     private Color defaultColor;
 
+    [Header("Damage Overlay")]
+    public Image overlay;
+    public float duration;
+    public float fadeSpeed;
+
+    private float durationTimer;
+
     [SerializeField] private int currentHealth;
     public int maxHealth = 100;
     public Slider slider;
 
-    [SerializeField] DamageScreen damageScreen;
+  
+
+    //[SerializeField] DamageScreen damageScreen;
 
     void Start()
     {
@@ -23,11 +32,26 @@ public class PlayerHealth : MonoBehaviour
         slider.maxValue = currentHealth;
         slider.value = currentHealth;
 
+        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 0);
+        
         //meshRenderer = GetComponentInChildren<MeshRenderer>();
         //defaultColor = meshRenderer.material.color;
     }
+    public void Update()
+    {
+        if (overlay.color.a > 0)
+        {
+            durationTimer += Time.deltaTime;
+            if (durationTimer > duration)
+            {
+                //we wnat to fade the image so
+                float tempAlpha = overlay.color.a;
+                tempAlpha -= Time.deltaTime * fadeSpeed;
+                overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, tempAlpha);
+            }
+        }
+    }
 
-    
     public void PlayerTakeDamage(int damage)
     {
        // Debug.Log("Player took damage");
@@ -37,7 +61,7 @@ public class PlayerHealth : MonoBehaviour
         slider.value = currentHealth;
 
         Debug.Log("Calling PlayDamageEffect");
-        damageScreen.StartAnimation();
+        //damageScreen.StartAnimation();
 
 
         if (currentHealth <= 0)
@@ -45,6 +69,12 @@ public class PlayerHealth : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        durationTimer = 0;
+        overlay.color = new Color(overlay.color.r, overlay.color.g, overlay.color.b, 1);
+
+
+
 
         //StartCoroutine(HitEffect());
         //IEnumerator HitEffect()
