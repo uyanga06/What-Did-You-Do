@@ -11,7 +11,11 @@ public class PlayerController : MonoBehaviour
     Controls.PlayerActions input;
     CharacterController controller;
     Animator animator;
-    AudioSource audioSource;
+
+    //private bool isWalking = false;
+    //private bool isIdling = true;
+
+
 
     [SerializeField] PlayerHealth ph;
 
@@ -19,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5;
     public float gravity = -9.8f;
     public float jumpHeight = 1.2f;
-    public Vector3 _PlayerVelocity;
+    Vector3 _PlayerVelocity;
     bool isGrounded;
 
     [Header("Camera")]
@@ -37,6 +41,11 @@ public class PlayerController : MonoBehaviour
     public float throwForce = 5f;
     public float throwVelocity = 1.5f;
 
+    [Header("Audio")]
+    AudioSource audioSource;
+    //[SerializeField] private AudioSource walking;
+
+
     void Awake()
     {
         controller = GetComponent<CharacterController>();
@@ -48,11 +57,13 @@ public class PlayerController : MonoBehaviour
         AssignInputs();
 
         Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false; 
+        Cursor.visible = false;
+        
     }
 
     void Update()
     {
+        
         isGrounded = controller.isGrounded;
 
         MoveInput(input.Movement.ReadValue<Vector2>()); //Takes the player's movement input
@@ -83,6 +94,19 @@ public class PlayerController : MonoBehaviour
         }
 
         pickupText.text = "";
+
+        //walking animation
+        if (input.Movement.IsPressed())
+        {
+            animator.SetBool("IsWalkng", true);
+            animator.SetBool("IsIdling", false);
+        }
+        else
+        {
+            animator.SetBool("IsWalkng", false);
+            animator.SetBool("IsIdling", true);
+        }
+
     }
     void MoveInput(Vector2 input)
     {
@@ -279,7 +303,6 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
             {
                 ItemPickUp pickUp = hit.collider.GetComponentInParent<ItemPickUp>();
-                //audioSource.PlayOneShot(itemPickUp);
 
                 if (pickUp != null)
                 {
@@ -309,38 +332,14 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
     }
 
-    //Walking audio for PC movement:
-    public AudioClip walking;
-    public float walkingSteps = 0.4f;
-
-    Coroutine walkingCoroutine;
-
-    void Start()
+   public void OnInteract(InputAction.CallbackContext context)
     {
-        walkingCoroutine = StartCoroutine(PlayWalking());
-    }
-    IEnumerator PlayWalking()
-    {
-        while (true)
-        {
-            Vector2 movement = input.Movement.ReadValue<Vector2>();
-
-            //plays the walkingSteps sound when the player is grounded 
-            if (movement.sqrMagnitude > 0.01f && controller.isGrounded && !attacking)
-            {
-                if (walking != null)
-                {
-                    AudioManager.instance.PlaySound(walking); 
-                }
-
-                yield return new WaitForSeconds(walkingSteps);
-            }
-            else
-            {
-                //checks if the player is not moving/standing still 
-                yield return new WaitForSeconds(0.1f);
-            }
-        }
+        if (!context.performed) return;
+   //     if (currentNPC != null)
+   //     {
+   //         currentNPC.StartDialogue();
+   //         Debug.Log("Interaction Happened");
+   //     }
     }
 
 }

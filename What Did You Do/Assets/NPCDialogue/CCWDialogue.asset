@@ -14,10 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCSystem
   npcName: CC the Witch
   dialogueLines:
-  - Psssst... Princess Swirl!
-  - What the hell did you do?!
-  autoProgressLines: 0101
-  autoProgressDelay: 2
-  typingSpeed: 0.05
+  - Psssst... Princess Swirl! What the hell did you do?!
+  - You've turned everyone into ZOMBIES!?
+  - You have to fix this. Get the anitdote from my lab. but you'll run into some
+    trouble
+  - Use LEFT-CLICK to attack
+  autoProgressLines: 01010101
+  autoProgressDelay: 3
+  typingSpeed: 0.06
   voiceSound: {fileID: 0}
   voicePitch: 1
