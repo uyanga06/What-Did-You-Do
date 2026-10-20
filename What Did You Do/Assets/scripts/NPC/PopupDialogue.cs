@@ -9,13 +9,12 @@ using UnityEngine.UI;
 // Reference List:
 // Game Code Library.(2025). 'Add NPC and Dialogue System to your Game - Top Down Unity 2D #19'.[Online Video]. Available at: https://youtu.be/eSH9mzcMRqw?si=1H-n2vGKE5wxMhHl. (Accessed on 23 August 2026)
 // KaiJPR.(2023). 'Level Up Your Game: Creating NPC Dialogue System - Unity Tutorial #1'.[Online Video]. Available at: https://youtu.be/X-7A0WzSx5A?si=TWrzuQj9gWXglW08 (Accessed on 23 August 2026)
-public class PopupDialogue : MonoBehaviour
+public class PopupDialogue : MonoBehaviour, IInteractable
 {
     public NPCSystem dialogueData;
-    public GameObject dialoguePanel;
-    public TMP_Text dialogueText, nameText;
+    public GameObject DialoguePanel;
+    public TMP_Text DialogueText, NameText  ;
     private Rigidbody rb;
-
 
 
     private int dialogueIndex;
@@ -23,11 +22,11 @@ public class PopupDialogue : MonoBehaviour
 
     private static GameObject currentText; //tracks which text is active
 
-     private bool hasPlayed = false;
+    // private bool hasPlayed = false;
 
     public void Start()
     {
-        dialoguePanel.SetActive(false);
+        DialoguePanel.SetActive(false);
 
     }
 
@@ -39,31 +38,58 @@ public class PopupDialogue : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) //when player enters the trigger zone, show the dialogue panel
     {
-        if (hasPlayed)
-        {
+        //    if (hasPlayed)
+        //    {
+        //        return;
+        //    }
+        //   if (other.CompareTag("Player"))
+        //    {
+        //        hasPlayed = true;
+
+        //        if (currentText != null && currentText != dialoguePanel)
+        //        {
+        //            currentText.SetActive(false);
+        //        }
+
+        //        if (dialoguePanel != null) //safety scheck
+        //        {
+        //          InteractionIcon.SetActive(true); //show the interaction icon
+        //           // dialoguePanel.SetActive(true); //show this text
+        //           // currentText = dialoguePanel; //update current text reference
+        //           // StartCoroutine(HideTextAfterDelay()); // start timer to hide it
+
+        //            // Destroy(textObject, 3f);
+        //        }
+
+        //   }
+    }
+
+
+
+
+
+
+    public bool CanInteract()
+    {
+        return !isDialogueActive; //dialogue can only be initiated if it is not already active
+    }
+
+    public void Interact()
+    {
+
+        //if there is no dialogue data or the dialogue is inactive, return
+        if ((dialogueData == null || !isDialogueActive))
             return;
-        }
-        if (other.CompareTag("Player"))
+
+        if (isDialogueActive)
         {
-            hasPlayed = true;
-
-            if (currentText != null && currentText != dialoguePanel)
-            {
-                currentText.SetActive(false);
-            }
-
-            if (dialoguePanel != null) //safety scheck
-            {
-
-                dialoguePanel.SetActive(true); //show this text
-                currentText = dialoguePanel; //update current text reference
-                StartCoroutine(HideTextAfterDelay()); // start timer to hide it
-
-                //Destroy(textObject, 3f);
-            }
-
-
+            NextLine(); //Next line of dialogue
         }
+        else
+        {
+            StartDialogue();
+        }
+
     }
 
     public void StartDialogue()
@@ -72,9 +98,9 @@ public class PopupDialogue : MonoBehaviour
         isDialogueActive = true;
         dialogueIndex = 0;
 
-        nameText.SetText(dialogueData.npcName);
+        NameText.SetText(dialogueData.npcName);
 
-        dialoguePanel.SetActive(true);
+        DialoguePanel.SetActive(true);
 
 
         //PauseController.SetPause(true);
@@ -83,13 +109,35 @@ public class PopupDialogue : MonoBehaviour
 
     }
 
+    void NextLine()
+    {
+        if (isTyping)
+        {
+            StopAllCoroutines();
+            DialogueText.SetText(dialogueData.dialogueLines[dialogueIndex]);
+            isTyping = false;
+        }
+        else
+        {
+            dialogueIndex++;
+            if (dialogueIndex < dialogueData.dialogueLines.Length)
+            {
+                StartCoroutine(TypeLIne());
+            }
+            else
+            {
+                EndDialogue();
+            }
+        }
+    }
+
     IEnumerator TypeLIne()
     {
         isTyping = true;
-        dialogueText.SetText("");
+        DialogueText.SetText("");
         foreach (char letter in dialogueData.dialogueLines[dialogueIndex])
         {
-            dialogueText.text += letter;
+            DialogueText.text += letter;
             yield return new WaitForSeconds(dialogueData.typingSpeed);
         }
 
@@ -98,22 +146,20 @@ public class PopupDialogue : MonoBehaviour
         if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
         {
             yield return new WaitForSeconds(dialogueData.autoProgressDelay);
-            //NextLine(); //DisplayNextLine();
+            NextLine(); //DisplayNextLine();
         }
-    }
 
-    private IEnumerator HideTextAfterDelay() //hides dialogue panel after 10 seconds
+
+    }
+    public void EndDialogue()
     {
-        yield return new WaitForSeconds(10f);
+        // Time.timeScale = 1f;
+        StopAllCoroutines();
+        isDialogueActive = false;
+        DialogueText.SetText("");
+        DialoguePanel.SetActive(false);
+        //PauseController.SetPause(false);
 
-        if (dialoguePanel != null) // safety check
-        {
-            dialoguePanel.SetActive(false);
-        }
-        if (currentText == dialoguePanel) //only hide if this is still active text
-        {
-            currentText = null;
-        }
+
     }
-
 }

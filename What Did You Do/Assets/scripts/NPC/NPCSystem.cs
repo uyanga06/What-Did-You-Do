@@ -12,7 +12,7 @@ public class NPCSystem : ScriptableObject
     public string npcName;
     public string[] dialogueLines;
     public bool[] autoProgressLines;
-    public float autoProgressDelay = 5.0f;
+    public float autoProgressDelay = 6.0f;
     public float typingSpeed = 0.05f;
     public AudioClip voiceSound;
     public float voicePitch = 1.0f;
