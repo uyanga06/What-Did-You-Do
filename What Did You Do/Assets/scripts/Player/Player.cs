@@ -342,6 +342,42 @@ public class PlayerController : MonoBehaviour
    //     }
     }
 
+
+    //Walking audio for PC movement:
+    public AudioClip walking;
+    public float walkingSteps = 0.4f;
+
+    Coroutine walkingCoroutine;
+
+    void Start()
+    {
+        walkingCoroutine = StartCoroutine(PlayWalking());
+    }
+    IEnumerator PlayWalking()
+    {
+        while (true)
+        {
+            Vector2 movement = input.Movement.ReadValue<Vector2>();
+
+            //plays the walkingSteps sound when the player is grounded 
+            if (movement.sqrMagnitude > 0.01f && controller.isGrounded && !attacking)
+            {
+                if (walking != null)
+                {
+                    AudioManager.instance.PlaySound(walking);
+                }
+
+                yield return new WaitForSeconds(walkingSteps);
+            }
+            else
+            {
+                //checks if the player is not moving/standing still 
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+    }
+
+
 }
 
 /*void FixedUpdate()
