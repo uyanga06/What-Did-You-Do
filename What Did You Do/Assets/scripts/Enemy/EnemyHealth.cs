@@ -14,9 +14,13 @@ public class EnemyHealth : MonoBehaviour
     public int maxHealth = 100;
     public Slider slider;
 
+    //[SerializeField] private Healthbar healthbar;
+    
+
     void Start()
     {
         currentHealth = maxHealth;
+        //healthbar.UpdateHealthBar(maxHealth, currentHealth);
         slider.maxValue = currentHealth;
         slider.value = currentHealth;
 
@@ -29,7 +33,6 @@ public class EnemyHealth : MonoBehaviour
       //  Debug.Log("Enemy took " + damage + " damage!");
 
         currentHealth -= damage;
-
         slider.value = currentHealth;
 
         if (currentHealth <= 0)
@@ -37,13 +40,18 @@ public class EnemyHealth : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        //else
+        //{
+        //    healthbar.UpdateHealthBar(maxHealth, currentHealth);
+        //}
 
-        StartCoroutine(HitEffect());
+            StartCoroutine(HitEffect());
         IEnumerator HitEffect()
         {
             meshRenderer.material.color = Color.white * 2f;
             yield return new WaitForSeconds(blinkDuration);
             meshRenderer.material.color = defaultColor;
+
         }
 
 
