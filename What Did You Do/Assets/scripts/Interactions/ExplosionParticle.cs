@@ -7,7 +7,7 @@ public class ExplosionParticle : MonoBehaviour
     [SerializeField] private Collider antidote;
 
     //public AudioSource audioSource;
-    private string cauldronTag = "Cauldron";
+    //private string cauldronTag = "Cauldron";
 
     //public AudioClip explode;
 
