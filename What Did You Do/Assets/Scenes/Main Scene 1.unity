@@ -125497,6 +125497,38 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1 &385235094 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+  m_PrefabInstance: {fileID: 1453293165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &385235095 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+  m_PrefabInstance: {fileID: 1453293165}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &385235096
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385235094}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 265b794d9de04774c8419da0e7a1581d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &386743214
 GameObject:
   m_ObjectHideFlags: 0
@@ -131082,15 +131114,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: X
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c57877b453935b3489b407765e4848cc, type: 2}
+  m_sharedMaterial: {fileID: -4472951520968492579, guid: c57877b453935b3489b407765e4848cc, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -152848,9 +152880,9 @@ GameObject:
   - component: {fileID: 467416248}
   - component: {fileID: 467416253}
   - component: {fileID: 467416254}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CC witch NPC
-  m_TagString: Untagged
+  m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152986,9 +153018,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogueData: {fileID: 11400000, guid: aad40181fa63bd346b4e0cb42f08f33e, type: 2}
-  dialoguePanel: {fileID: 849664462}
-  dialogueText: {fileID: 838811006}
-  nameText: {fileID: 1065831588}
+  dialoguePanel: {fileID: 1903953909}
+  dialogueText: {fileID: 1593759477}
+  nameText: {fileID: 1739833193}
 --- !u!1 &469793117
 GameObject:
   m_ObjectHideFlags: 0
@@ -268565,7 +268597,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1903953910}
   m_Father: {fileID: 1152107422}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -271896,7 +271929,6 @@ RectTransform:
   m_Children:
   - {fileID: 838811005}
   - {fileID: 1065831587}
-  - {fileID: 1989819371}
   m_Father: {fileID: 467416251}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
@@ -379304,9 +379336,9 @@ GameObject:
   - component: {fileID: 1152107423}
   - component: {fileID: 1152107429}
   - component: {fileID: 1152107428}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: cauldron(Interactable)
-  m_TagString: Untagged
+  m_TagString: npc
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -379324,7 +379356,6 @@ Transform:
   m_LocalScale: {x: 0.7512031, y: 0.52584213, z: 0.7512031}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1903953910}
   - {fileID: 838911598}
   m_Father: {fileID: 1016208694}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -453479,7 +453510,7 @@ Transform:
   m_GameObject: {fileID: 1388653922}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.997, z: -0}
+  m_LocalPosition: {x: 0.85, y: 1.41, z: 0.32}
   m_LocalScale: {x: 1, y: 0.625, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -470182,6 +470213,66 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!1001 &1453293165
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1678013112}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.89
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.19
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      propertyPath: m_Name
+      value: Low Poly Body
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 385235096}
+  m_SourcePrefab: {fileID: 100100000, guid: 6f2545a08594c3c4d955c397bdba47b8, type: 3}
 --- !u!43 &1455247280
 Mesh:
   m_ObjectHideFlags: 0
@@ -515417,7 +515508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Oops! That's not supposed to happen. Guess I did the potion wrong.
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c57877b453935b3489b407765e4848cc, type: 2}
   m_sharedMaterial: {fileID: -4472951520968492579, guid: c57877b453935b3489b407765e4848cc, type: 2}
@@ -537371,7 +537462,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1678013105}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -537434,6 +537525,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 385235095}
   - {fileID: 901988575}
   - {fileID: 875446576}
   - {fileID: 1388653923}
@@ -537469,7 +537561,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61be6e6e9fac064ba5cb3b3aca51b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  currentNPC: {fileID: 0}
   ph: {fileID: 1678013113}
   moveSpeed: 8
   gravity: -9.81
@@ -537508,7 +537599,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
   m_Height: 2
@@ -568074,7 +568165,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Princess Swirl
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3277a84ea0c042d45be973b163e5f798, type: 2}
   m_sharedMaterial: {fileID: 683694392890994242, guid: 3277a84ea0c042d45be973b163e5f798, type: 2}
@@ -637582,17 +637673,18 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1903953909}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 580.06055}
-  m_LocalScale: {x: 1.0197809, y: 1.4568297, z: 1.0197809}
+  m_LocalPosition: {x: 0, y: 0, z: 63.00012}
+  m_LocalScale: {x: 0.88575983, y: 0.8857596, z: 0.88575983}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1593759476}
   - {fileID: 1739833192}
-  m_Father: {fileID: 1152107422}
+  - {fileID: 1989819371}
+  m_Father: {fileID: 838911598}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 265.73212, y: -930.871}
+  m_AnchoredPosition: {x: 10.000046, y: 239}
   m_SizeDelta: {x: 1920, y: 600}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1903953911
@@ -664933,17 +665025,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989819370}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9095803, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.00018088118}
+  m_LocalScale: {x: 0.9095798, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 395471153}
-  m_Father: {fileID: 849664463}
+  m_Father: {fileID: 1903953910}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 792, y: -205}
+  m_AnchoredPosition: {x: 791.9994, y: -205}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1989819372
@@ -664990,7 +665082,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 467416254}
+      - m_Target: {fileID: 1152107428}
         m_TargetAssemblyTypeName: NPC, Assembly-CSharp
         m_MethodName: EndDialogue
         m_Mode: 1
@@ -665015,7 +665107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -665414,7 +665506,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1992350182
 RectTransform:
   m_ObjectHideFlags: 0

@@ -4,6 +4,7 @@
 //Code Version: Unity 2022.3.20f1 LTS
 
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ObjectDialogue : MonoBehaviour
 {
@@ -22,20 +23,13 @@ public class ObjectDialogue : MonoBehaviour
 
     }
 
-    //public void Update()
-    //{
-
-    public void OnInteract(InputAction.CallbackContext context)
-    {
-        if (!context.performed) return;
-        if (currentNPC != null)
+    public void Update() {
+        if (currentNPC != null && Keyboard.current.eKey.wasPressedThisFrame) //checks if the player is in range of an interactable object and presses the E key
         {
-            currentNPC.StartDialogue();
-            Debug.Log("Interaction Happened");
+            currentNPC.StartDialogue(); //starts the dialogue with the NPC
         }
     }
 
-    //}
 
     private void OnTriggerEnter(Collider other) //triggers interaction icon to show when in range with an interactable object
     {

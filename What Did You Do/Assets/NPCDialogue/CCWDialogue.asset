@@ -18,6 +18,6 @@ MonoBehaviour:
   - What the hell did you do?!
   autoProgressLines: 0101
   autoProgressDelay: 2
-  typingSpeed: 0.05
+  typingSpeed: 0.06
   voiceSound: {fileID: 0}
   voicePitch: 1

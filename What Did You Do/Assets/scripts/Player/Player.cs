@@ -317,15 +317,15 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
     }
 
-   //public void OnInteract(InputAction.CallbackContext context)
-   // {
-   //     if (!context.performed) return;
+   public void OnInteract(InputAction.CallbackContext context)
+    {
+        if (!context.performed) return;
    //     if (currentNPC != null)
    //     {
    //         currentNPC.StartDialogue();
    //         Debug.Log("Interaction Happened");
    //     }
-   // }
+    }
 
 }
 

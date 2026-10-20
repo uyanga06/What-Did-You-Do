@@ -94,6 +94,7 @@ public class NPC : MonoBehaviour, IInteractable
 
    public void StartDialogue()
     {
+       // Time.timeScale = 0f;
         isDialogueActive = true;
         dialogueIndex = 0;
 
@@ -144,7 +145,7 @@ public class NPC : MonoBehaviour, IInteractable
 
         if (dialogueData.autoProgressLines.Length > dialogueIndex && dialogueData.autoProgressLines[dialogueIndex])
         {
-            // yield return new WaitForSeconds(dialogueData.autoProgressDelay);
+             yield return new WaitForSeconds(dialogueData.autoProgressDelay);
             NextLine(); //DisplayNextLine();
         }
 
@@ -152,6 +153,7 @@ public class NPC : MonoBehaviour, IInteractable
     }
     public void EndDialogue()
     {
+       // Time.timeScale = 1f;
         StopAllCoroutines();
         isDialogueActive = false;
         dialogueText.SetText("");
