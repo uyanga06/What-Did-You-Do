@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour
         if (Physics.Raycast(walkPoint, Vector3.down /*-transform.up*/, 2f, whatIsGround))
             walkPointSet = true;
 
-        Debug.LogWarning(name + " FAILED to find a patrol point!");
+       // Debug.LogWarning(name + " FAILED to find a patrol point!");
     }
 
 
