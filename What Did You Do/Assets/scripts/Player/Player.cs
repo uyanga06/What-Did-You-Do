@@ -11,8 +11,11 @@ public class PlayerController : MonoBehaviour
     Controls.PlayerActions input;
     CharacterController controller;
     Animator animator;
-   
-    
+
+    //private bool isWalking = false;
+    //private bool isIdling = true;
+
+
 
     [SerializeField] PlayerHealth ph;
 
@@ -91,6 +94,18 @@ public class PlayerController : MonoBehaviour
         }
 
         pickupText.text = "";
+
+        //walking animation
+        if (input.Movement.IsPressed())
+        {
+            animator.SetBool("IsWalkng", true);
+            animator.SetBool("IsIdling", false);
+        }
+        else
+        {
+            animator.SetBool("IsWalkng", false);
+            animator.SetBool("IsIdling", true);
+        }
 
     }
     void MoveInput(Vector2 input)

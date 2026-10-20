@@ -86,7 +86,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|PC_IdleCycle
+      name: Idle
       takeName: Armature|PC_IdleCycle
       internalID: -2900241818835365337
       firstFrame: 0
@@ -144,7 +144,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|PC_WalkCycle
+      name: Walk
       takeName: Armature|PC_WalkCycle
       internalID: -1920252626127938957
       firstFrame: 0
@@ -155,7 +155,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

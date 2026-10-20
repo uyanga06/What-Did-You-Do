@@ -162,4 +162,18 @@ public class PopupDialogue : MonoBehaviour, IInteractable
 
 
     }
+    private IEnumerator HideTextAfterDelay() //hides dialogue panel after 10 seconds
+    {
+        yield return new WaitForSeconds(10f);
+
+        if (DialoguePanel != null) // safety check
+        {
+            DialoguePanel.SetActive(false);
+        }
+        if (currentText == DialoguePanel) //only hide if this is still active text
+        {
+            currentText = null;
+        }
+    }
+
 }
