@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
 
     public Animator animator;
 
+    AudioSource audioSource;
+    public AudioClip zombieAttack;
+    //public AudioClip zombieDefeat;
+
     public float Health;
 
     [SerializeField] EnemyHealth eh;
@@ -61,8 +65,6 @@ public class Enemy : MonoBehaviour
         ////added
         ////timeSinceLastSawPlayer = suspiciousTime;
         //timeToAttack = attackTime;
-
-
     }
 
     private void Update()
@@ -139,7 +141,7 @@ public class Enemy : MonoBehaviour
 
         transform.LookAt(player); //to look at player as enemy approaches player
 
-       
+
 
         if (!alreadyAttacked)
         {
@@ -151,8 +153,6 @@ public class Enemy : MonoBehaviour
 
         }
     }
-
-
     private void ResetAttack()
     {
         alreadyAttacked = false;
