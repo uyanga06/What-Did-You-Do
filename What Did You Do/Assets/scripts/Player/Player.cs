@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     Controls.PlayerActions input;
     CharacterController controller;
     Animator animator;
+    AudioSource audioSource;
 
     [SerializeField] PlayerHealth ph;
 
@@ -18,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 5;
     public float gravity = -9.8f;
     public float jumpHeight = 1.2f;
-    Vector3 _PlayerVelocity;
+    public Vector3 _PlayerVelocity;
     bool isGrounded;
 
     [Header("Camera")]
@@ -35,11 +36,6 @@ public class PlayerController : MonoBehaviour
     [Header("Throw")] //initial values for throwing the object
     public float throwForce = 5f;
     public float throwVelocity = 1.5f;
-
-    [Header("Audio")]
-    AudioSource audioSource;
-    //[SerializeField] private AudioSource walking;
-
 
     void Awake()
     {
@@ -283,6 +279,7 @@ public class PlayerController : MonoBehaviour
             if (Physics.Raycast(ray, out RaycastHit hit, pickupRange))
             {
                 ItemPickUp pickUp = hit.collider.GetComponentInParent<ItemPickUp>();
+                //audioSource.PlayOneShot(itemPickUp);
 
                 if (pickUp != null)
                 {
@@ -310,6 +307,40 @@ public class PlayerController : MonoBehaviour
         heldObject = null;
 
         Cursor.visible = true; //ensures that the mouse cursor is still on the screen after throwing the object
+    }
+
+    //Walking audio for PC movement:
+    public AudioClip walking;
+    public float walkingSteps = 0.4f;
+
+    Coroutine walkingCoroutine;
+
+    void Start()
+    {
+        walkingCoroutine = StartCoroutine(PlayWalking());
+    }
+    IEnumerator PlayWalking()
+    {
+        while (true)
+        {
+            Vector2 movement = input.Movement.ReadValue<Vector2>();
+
+            //plays the walkingSteps sound when the player is grounded 
+            if (movement.sqrMagnitude > 0.01f && controller.isGrounded && !attacking)
+            {
+                if (walking != null)
+                {
+                    AudioManager.instance.PlaySound(walking); 
+                }
+
+                yield return new WaitForSeconds(walkingSteps);
+            }
+            else
+            {
+                //checks if the player is not moving/standing still 
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
     }
 
 }

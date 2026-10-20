@@ -14,6 +14,10 @@ public class Enemy : MonoBehaviour
 
     public Animator animator;
 
+    AudioSource audioSource;
+    public AudioClip zombieAttack;
+    //public AudioClip zombieDefeat;
+
     public float Health;
 
     [SerializeField] EnemyHealth eh;
@@ -53,6 +57,9 @@ public class Enemy : MonoBehaviour
 
       
 
+        ////added
+        ////timeSinceLastSawPlayer = suspiciousTime;
+        //timeToAttack = attackTime;
     }
 
     private void Update()
@@ -140,6 +147,7 @@ public class Enemy : MonoBehaviour
         Vector3 direction = player.position - transform.position;
         direction.y = 0f;
 
+
         if (direction.sqrMagnitude > 0.001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -162,8 +170,6 @@ public class Enemy : MonoBehaviour
 
         //}
     }
-
-
     private void ResetAttack()
     {
         alreadyAttacked = false;
