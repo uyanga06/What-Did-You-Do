@@ -10,12 +10,21 @@ public class MainMenu : MonoBehaviour
     //UI buttons that will be used for main menu
     public Button playButton;
 
+    public Button settingsButton;
+
     public Button exitButton;
 
     public void OnPlayClick()
     {
 
         SceneManager.LoadScene("BackStory");
+
+    }
+
+    public void OnSetClick()
+    {
+
+        SceneManager.LoadScene("SettingsScreen");
 
     }
 

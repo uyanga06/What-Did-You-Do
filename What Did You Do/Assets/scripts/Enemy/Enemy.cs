@@ -14,8 +14,8 @@ public class Enemy : MonoBehaviour
 
     public Animator animator;
 
-    AudioSource audioSource;
-    public AudioClip zombieAttack;
+    //AudioSource audioSource;
+    //public AudioClip zombieAttack;
     //public AudioClip zombieDefeat;
 
     public float Health;

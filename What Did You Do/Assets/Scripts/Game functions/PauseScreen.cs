@@ -10,9 +10,12 @@ public class PauseScreen : MonoBehaviour
     public Button PauseButton;
     public Button ResumeButton;
     public Button TitlePageButton;
+    public Button SettingsButton;
     public Button QuitButton;
-    public Slider VolumeSlider;
+    //public Slider VolumeSlider;
     public GameObject HealthBars;
+
+    public GameObject ControlsPopUp;
     private bool isPaused = false;
 
     void Start() //depicts the UI elements that are/are not dispalyed at the start
@@ -20,6 +23,7 @@ public class PauseScreen : MonoBehaviour
         PausePanel.SetActive(false);
         HealthBars.SetActive(true);
 
+        isPaused = false;
         Time.timeScale = 1f;
 
         //hides/locks the cursor 
@@ -31,12 +35,13 @@ public class PauseScreen : MonoBehaviour
         ResumeButton.onClick.AddListener(HidePausePanel);
         QuitButton.onClick.AddListener(QuitGame);
         TitlePageButton.onClick.AddListener(LoadTitleScene);
+        //SettingsButton.onClick.AddListener(LoadSettingsScreen);
 
-        //the slider for the audio of the game
+        /*//the slider for the audio of the game
         float savedVolume = PlayerPrefs.GetFloat("GameVolume", 1f);
         AudioListener.volume = savedVolume;
         VolumeSlider.value = savedVolume;
-        VolumeSlider.onValueChanged.AddListener(ChangeVolume); //handles value changes 
+        VolumeSlider.onValueChanged.AddListener(ChangeVolume); //handles value changes*/
     }
 
     void Update()
@@ -61,6 +66,7 @@ public class PauseScreen : MonoBehaviour
 
         PausePanel.SetActive(true);
         HealthBars.SetActive(false);
+        //ControlsPopUp.SetActive(false);
         Time.timeScale = 0f;
 
         PauseCursor();
@@ -72,6 +78,7 @@ public class PauseScreen : MonoBehaviour
 
         PausePanel.SetActive(false);
         HealthBars.SetActive(true);
+        //ControlsPopUp.SetActive(true);
         Time.timeScale = 1f;
 
         GameCursor();
@@ -106,12 +113,17 @@ public class PauseScreen : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    //sets volume value based on the slider value s
+    private void LoadSettingsScreen()
+    {
+        SceneManager.LoadScene("SettingsScreen");
+    }
+
+    /*//sets volume value based on the slider value s
     public void ChangeVolume(float volume)
     {
         AudioListener.volume = volume;
 
         PlayerPrefs.SetFloat("GameVolume", volume);
         PlayerPrefs.Save();
-    }
+    }*/
 }
