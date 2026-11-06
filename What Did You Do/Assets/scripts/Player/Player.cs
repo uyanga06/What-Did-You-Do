@@ -58,7 +58,8 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        
+
+        //Time.timeScale = 0f;
     }
 
     void Update()

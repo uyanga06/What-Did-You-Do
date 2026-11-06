@@ -11,6 +11,7 @@ public class EnemyWeaponAttack : MonoBehaviour
     [SerializeField] private float weaponHitRadius;
     [SerializeField] private int damage = 20;
 
+
     [SerializeField] private LayerMask targetLayer;
 
     public Transform attackPoint;
