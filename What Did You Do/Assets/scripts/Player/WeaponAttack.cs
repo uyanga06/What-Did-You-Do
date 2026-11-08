@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WeaponAttack : MonoBehaviour
 {
     //public FPController player;
-   // public GameObject dialoguePanel;
+    public GameObject dialoguePanel;
     [SerializeField] private float weaponHitRadius;
     [SerializeField] private int damage = 2;
 
