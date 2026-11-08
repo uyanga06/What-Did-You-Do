@@ -10,7 +10,11 @@ public class PlayerController : MonoBehaviour
     Controls playerInput;
     Controls.PlayerActions input;
     CharacterController controller;
-    Animator animator;
+    //Animator playerAnimator;
+    //Animator weaponAnimator;
+
+    [SerializeField] Animator playerAnimator;
+    [SerializeField] Animator weaponAnimator;
 
     //private bool isWalking = false;
     //private bool isIdling = true;
@@ -48,8 +52,12 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        playerAnimator = GetComponentInChildren<Animator>();
+
+        Debug.Log("Animator assigned: " + playerAnimator.gameObject.name);
+
         controller = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
+        weaponAnimator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
 
         playerInput = new Controls();
@@ -99,13 +107,13 @@ public class PlayerController : MonoBehaviour
         //walking animation
         if (input.Movement.IsPressed())
         {
-            animator.SetBool("IsWalkng", true);
-            animator.SetBool("IsIdling", false);
+            playerAnimator.SetBool("IsWalking", true);
+            playerAnimator.SetBool("IsIdling", false);
         }
         else
         {
-            animator.SetBool("IsWalkng", false);
-            animator.SetBool("IsIdling", true);
+            playerAnimator.SetBool("IsWalking", false);
+            playerAnimator.SetBool("IsIdling", true);
         }
 
     }
@@ -182,7 +190,7 @@ public class PlayerController : MonoBehaviour
 
         // PLAY THE ANIMATION //
         currentAnimationState = newState;
-        animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
+        weaponAnimator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
     }
 
     void SetAnimations()
@@ -343,7 +351,7 @@ public class PlayerController : MonoBehaviour
    //     }
     }
 
-
+    [Header("Audio")]
     //Walking audio for PC movement:
     public AudioClip walking;
     public float walkingSteps = 0.4f;

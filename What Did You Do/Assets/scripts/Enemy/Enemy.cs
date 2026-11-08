@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
         if (distanceToWalkPoint.magnitude < 2f)
             walkPointSet = false;
         
-        Debug.Log(name + " found a patrol point: " + walkPoint);
+        //Debug.Log(name + " found a patrol point: " + walkPoint);
     }
 
     private void SearchWalkPoint()
