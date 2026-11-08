@@ -5897,7 +5897,7 @@ RectTransform:
   m_Father: {fileID: 1689002667}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -492716,7 +492716,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &839568972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514410,7 +514410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &875446576
 Transform:
   m_ObjectHideFlags: 0
@@ -525696,7 +525696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &901988575
 RectTransform:
   m_ObjectHideFlags: 0
@@ -545589,7 +545589,7 @@ RectTransform:
   m_Father: {fileID: 1581729538}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -581635,7 +581635,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &997727925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713022,7 +713022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1195644804
 Transform:
   m_ObjectHideFlags: 0
@@ -963200,8 +963200,8 @@ MonoBehaviour:
   overlay: {fileID: 366134593}
   duration: 1
   fadeSpeed: 1
-  currentHealth: 300
-  maxHealth: 300
+  currentHealth: 100
+  maxHealth: 100
   slider: {fileID: 1919039563}
 --- !u!114 &1678013114
 MonoBehaviour:
@@ -963215,6 +963215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61be6e6e9fac064ba5cb3b3aca51b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  playerAnimator: {fileID: 1813679162}
+  weaponAnimator: {fileID: 447224637}
   ph: {fileID: 1678013113}
   moveSpeed: 8
   gravity: -9.81
@@ -1256949,9 +1256951,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: attackRange
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
       value: 
       objectReference: {fileID: 8300000, guid: 7cc41afcca5bd064f9cb3e8b33866ad1, type: 3}
+    - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: weaponHitRadius
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
