@@ -105,16 +105,16 @@ public class PlayerController : MonoBehaviour
         pickupText.text = "";
 
         //walking animation
-        //if (input.Movement.IsPressed())
-        //{
-        //    playerAnimator.SetBool("IsWalking", true);
-        //    playerAnimator.SetBool("IsIdling", false);
-        //}
-        //else
-        //{
-        //    playerAnimator.SetBool("IsWalking", false);
-        //    playerAnimator.SetBool("IsIdling", true);
-        //}
+        if (input.Movement.IsPressed())
+        {
+            playerAnimator.SetBool("IsWalking", true);
+            playerAnimator.SetBool("IsIdling", false);
+        }
+        else
+        {
+            playerAnimator.SetBool("IsWalking", false);
+            playerAnimator.SetBool("IsIdling", true);
+        }
 
     }
     void MoveInput(Vector2 input)

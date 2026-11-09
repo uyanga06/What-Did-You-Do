@@ -14,10 +14,6 @@ public class Enemy : MonoBehaviour
 
     public Animator animator;
 
-    //AudioSource audioSource;
-    //public AudioClip zombieAttack;
-    //public AudioClip zombieDefeat;
-
     public float Health;
 
     [SerializeField] EnemyHealth eh;
@@ -36,7 +32,9 @@ public class Enemy : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     public bool alreadyAttacked;
-    
+    public int attackDamage = 10;
+    private PlayerHealth playerHealth;
+
 
 
 
@@ -47,19 +45,20 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
-        
+
 
         GameObject playerObj = GameObject.Find("Player");
         if (playerObj != null)
+        {
             player = playerObj.transform;
+            playerHealth = playerObj.GetComponent<PlayerHealth>();
+        }
+
 
         agent = GetComponent<NavMeshAgent>();
 
-      
 
-        ////added
-        ////timeSinceLastSawPlayer = suspiciousTime;
-        //timeToAttack = attackTime;
+
     }
 
     private void Update()
@@ -68,9 +67,9 @@ public class Enemy : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) Patroling();
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        //if (!playerInSightRange && !playerInAttackRange) Patroling();
+        //if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        //if (playerInAttackRange && playerInSightRange) AttackPlayer();
 
         //for enemy to keep patrolling
         if (playerInSightRange)
@@ -86,7 +85,7 @@ public class Enemy : MonoBehaviour
         }
 
 
-        
+
 
 
     }
@@ -103,7 +102,7 @@ public class Enemy : MonoBehaviour
         //Reached the walk point 
         if (distanceToWalkPoint.magnitude < 2f)
             walkPointSet = false;
-        
+
         //Debug.Log(name + " found a patrol point: " + walkPoint);
     }
 
@@ -117,8 +116,8 @@ public class Enemy : MonoBehaviour
 
         if (Physics.Raycast(walkPoint, Vector3.down /*-transform.up*/, 2f, whatIsGround))
             walkPointSet = true;
-
-       // Debug.LogWarning(name + " FAILED to find a patrol point!");
+        else 
+            Debug.LogWarning(name + " FAILED to find a patrol point!");
     }
 
 
@@ -147,7 +146,6 @@ public class Enemy : MonoBehaviour
         Vector3 direction = player.position - transform.position;
         direction.y = 0f;
 
-
         if (direction.sqrMagnitude > 0.001f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(direction);
@@ -160,16 +158,23 @@ public class Enemy : MonoBehaviour
         }
 
 
-        //if (!alreadyAttacked)
-        //{
-        //    //Where my code for an attack should go
-        //    //Debug.Log("Player Attacked");
 
-        //    alreadyAttacked = true;
-        //    Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        if (!alreadyAttacked)
+        {
+            //Where my code for an attack should go
+            Debug.Log("Player Attacked");
 
-        //}
+            alreadyAttacked = true;
+
+            if (playerHealth != null)
+                playerHealth.PlayerTakeDamage(attackDamage);
+
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+
+        }
     }
+
+
     private void ResetAttack()
     {
         alreadyAttacked = false;
@@ -180,7 +185,7 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         eh.TakeDamage(damage);
-        
+
     }
 
 
@@ -250,6 +255,10 @@ public class Enemy : MonoBehaviour
     //Health -= damage;
     //Debug.Log("Enemy damaged");
     //if (hHealth <= 0) Invoke(nameof(DestroyEnemy), 0.5f);
+
+
+
+
 
 
 
