@@ -120006,6 +120006,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: attackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
       value: 
       objectReference: {fileID: 8300000, guid: 7cc41afcca5bd064f9cb3e8b33866ad1, type: 3}
@@ -269148,7 +269152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &466053739
 RectTransform:
   m_ObjectHideFlags: 0
@@ -488635,6 +488639,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: attackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
       value: 
       objectReference: {fileID: 8300000, guid: 7cc41afcca5bd064f9cb3e8b33866ad1, type: 3}
@@ -589348,7 +589356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1009732811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736121,6 +736129,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: attackRange
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
       value: 
       objectReference: {fileID: 8300000, guid: 7cc41afcca5bd064f9cb3e8b33866ad1, type: 3}
@@ -745582,6 +745594,10 @@ PrefabInstance:
       propertyPath: attackPoint
       value: 
       objectReference: {fileID: 1340847705}
+    - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: attackRange
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
       value: 
@@ -833370,7 +833386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1426578454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1256952,7 +1256968,7 @@ PrefabInstance:
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: attackRange
-      value: 0.8
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
