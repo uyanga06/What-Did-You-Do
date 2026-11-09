@@ -130764,6 +130764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc716eca8960fa64394a4e778d38b580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttack
+  dialoguePanel: {fileID: 0}
   weaponHitRadius: 10
   damage: 20
   targetLayer:
@@ -199264,7 +199265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &349060687
 RectTransform:
   m_ObjectHideFlags: 0
@@ -216272,7 +216273,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9622642, g: 0.9471342, b: 0.9471342, a: 0.7607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -259097,6 +259098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc716eca8960fa64394a4e778d38b580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponAttack
+  dialoguePanel: {fileID: 447224632}
   weaponHitRadius: 10
   damage: 20
   targetLayer:
@@ -269146,7 +269148,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &466053739
 RectTransform:
   m_ObjectHideFlags: 0
@@ -514408,7 +514410,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &875446576
 Transform:
   m_ObjectHideFlags: 0
@@ -589346,7 +589348,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1009732811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833368,7 +833370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1426578454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -963213,6 +963215,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e61be6e6e9fac064ba5cb3b3aca51b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
+  playerAnimator: {fileID: 1813679162}
+  weaponAnimator: {fileID: 447224637}
   ph: {fileID: 1678013113}
   moveSpeed: 8
   gravity: -9.81
@@ -1256932,7 +1256936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7089488945916977302, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7979280175353547904, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: player
@@ -1256947,9 +1256951,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: attackRange
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
       value: 
       objectReference: {fileID: 8300000, guid: 7cc41afcca5bd064f9cb3e8b33866ad1, type: 3}
+    - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: weaponHitRadius
+      value: 0.8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
