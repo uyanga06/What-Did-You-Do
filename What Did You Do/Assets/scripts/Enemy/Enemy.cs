@@ -32,7 +32,9 @@ public class Enemy : MonoBehaviour
     //Attacking
     public float timeBetweenAttacks;
     public bool alreadyAttacked;
-    
+    public int attackDamage = 10;
+    private PlayerHealth playerHealth;
+
 
 
 
@@ -47,7 +49,11 @@ public class Enemy : MonoBehaviour
 
         GameObject playerObj = GameObject.Find("Player");
         if (playerObj != null)
+        {
             player = playerObj.transform;
+            playerHealth = playerObj.GetComponent<PlayerHealth>();
+        }
+            
 
         agent = GetComponent<NavMeshAgent>();
 
@@ -152,15 +158,20 @@ public class Enemy : MonoBehaviour
         }
 
 
-        //if (!alreadyAttacked)
-        //{
-        //    //Where my code for an attack should go
-        //    //Debug.Log("Player Attacked");
 
-        //    alreadyAttacked = true;
-        //    Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        if (!alreadyAttacked)
+        {
+            //Where my code for an attack should go
+            Debug.Log("Player Attacked");
 
-        //}
+            alreadyAttacked = true;
+
+            if (playerHealth != null)
+                playerHealth.PlayerTakeDamage(attackDamage);
+
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+
+        }
     }
 
 
