@@ -10,9 +10,13 @@ public class PlayerController : MonoBehaviour
     Controls playerInput;
     Controls.PlayerActions input;
     CharacterController controller;
+    //Animator playerAnimator;
     Animator animator;
 
-    //private bool isWalking = false;
+    [SerializeField] private Animator playerAnimator;
+    [SerializeField] private Animator weaponAnimator;
+
+    private bool isWalking = false;
     //private bool isIdling = true;
 
 
@@ -48,8 +52,12 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
+        //playerAnimator = GetComponentInChildren<Animator>();
+
+        Debug.Log("Animator assigned: " + playerAnimator.gameObject.name);
+
         controller = GetComponent<CharacterController>();
-        animator = GetComponentInChildren<Animator>();
+        //animator = GetComponentInChildren<Animator>();
         audioSource = GetComponent<AudioSource>();
 
         playerInput = new Controls();
@@ -99,13 +107,13 @@ public class PlayerController : MonoBehaviour
         //walking animation
         if (input.Movement.IsPressed())
         {
-            animator.SetBool("IsWalkng", true);
-            animator.SetBool("IsIdling", false);
+            playerAnimator.SetBool("IsWalking", true);
+            playerAnimator.SetBool("IsIdling", false);
         }
         else
         {
-            animator.SetBool("IsWalkng", false);
-            animator.SetBool("IsIdling", true);
+            playerAnimator.SetBool("IsWalking", false);
+            playerAnimator.SetBool("IsIdling", true);
         }
 
     }
@@ -169,10 +177,10 @@ public class PlayerController : MonoBehaviour
     // ANIMATIONS //
     // ---------- //
 
-    public const string IDLE = "Idle";
-    public const string WALK = "Walk";
-    public const string ATTACK1 = "Attack 1";
-    public const string ATTACK2 = "Attack 2";
+    //public const string IDLE = "Idle";
+    //public const string WALK = "Walk";
+    //public const string ATTACK1 = "Attack 1";
+    //public const string ATTACK2 = "Attack 2";
     string currentAnimationState;
 
     public void ChangeAnimationState(string newState)
@@ -182,7 +190,7 @@ public class PlayerController : MonoBehaviour
 
         // PLAY THE ANIMATION //
         currentAnimationState = newState;
-        animator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
+        weaponAnimator.CrossFadeInFixedTime(currentAnimationState, 0.2f);
     }
 
     void SetAnimations()
@@ -193,15 +201,15 @@ public class PlayerController : MonoBehaviour
             //Gets the direction of the player
             Vector2 movement = input.Movement.ReadValue<Vector2>();
 
-            //Checks if there is movement or not
-            if (movement.sqrMagnitude < 0.01f)
-            {
-                ChangeAnimationState(IDLE);
-            }
-            else
-            {
-                ChangeAnimationState(WALK);
-            }
+            ////Checks if there is movement or not
+            //if (movement.sqrMagnitude < 0.01f)
+            //{
+            //    ChangeAnimationState(IDLE);
+            //}
+            //else
+            //{
+            //    ChangeAnimationState(WALK);
+            //}
         }
     }
 
@@ -226,11 +234,12 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-
+        
         if (!readyToAttack || attacking) return;
 
         readyToAttack = false;
         attacking = true;
+        weaponAnimator.SetTrigger("doAttack"); //new 
 
         Invoke(nameof(ResetAttack), attackSpeed);
         Invoke(nameof(AttackRaycast), attackDelay);
@@ -240,17 +249,18 @@ public class PlayerController : MonoBehaviour
         audioSource.pitch = Random.Range(0.9f, 1.1f);
         audioSource.PlayOneShot(swordSwing);
 
-        if (attackCount == 0)
-        {
-            ChangeAnimationState(ATTACK1);
-            attackCount++;
-        }
-        else
-        {
-            ChangeAnimationState(ATTACK2);
-            attackCount = 0;
-        }
+        //if (attackCount == 0)
+        //{
+        //    ChangeAnimationState(ATTACK1);
+        //    attackCount++;
+        //}
+        //else
+        //{
+        //    ChangeAnimationState(ATTACK2);
+        //    attackCount = 0;
+        //}
 
+        //Debug.Log("Attack 1 animation is playing");
     }
 
     void ResetAttack()
@@ -258,7 +268,7 @@ public class PlayerController : MonoBehaviour
         attacking = false;
         readyToAttack = true;
 
-        //Debug.Log("Attack Reset");
+        Debug.Log("Attack Reset");
     }
 
     void AttackRaycast()
@@ -343,7 +353,7 @@ public class PlayerController : MonoBehaviour
    //     }
     }
 
-
+    [Header("Audio")]
     //Walking audio for PC movement:
     public AudioClip walking;
     public float walkingSteps = 0.4f;
