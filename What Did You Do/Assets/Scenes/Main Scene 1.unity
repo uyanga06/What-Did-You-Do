@@ -120007,7 +120007,7 @@ PrefabInstance:
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: attackRange
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
@@ -488640,7 +488640,7 @@ PrefabInstance:
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: attackRange
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
@@ -736130,7 +736130,7 @@ PrefabInstance:
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: attackRange
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
@@ -745596,7 +745596,7 @@ PrefabInstance:
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: attackRange
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
@@ -1256968,7 +1256968,7 @@ PrefabInstance:
       objectReference: {fileID: 1340847705}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: attackRange
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8615111514038858747, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: zombieAttack
