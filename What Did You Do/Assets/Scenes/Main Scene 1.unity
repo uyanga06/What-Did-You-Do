@@ -31213,13 +31213,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 35245666}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3126005, y: -0.3824919, z: 0.5947266, w: 0.6342564}
-  m_LocalPosition: {x: 17.969965, y: -3.7799966, z: -146.87}
+  m_LocalRotation: {x: 0.35129383, y: -0.34491232, z: 0.61728054, w: 0.6136717}
+  m_LocalPosition: {x: 17.24, y: -3.97, z: -146.76}
   m_LocalScale: {x: 2.20024, y: 2.2002409, z: 2.2002409}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 245146313}
-  m_LocalEulerAnglesHint: {x: 58.374, y: -12.486, z: 79.322}
+  m_LocalEulerAnglesHint: {x: 58.978, y: 1.153, z: 90.988}
 --- !u!114 &35245668
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -740372,7 +740372,7 @@ GameObject:
   - component: {fileID: 962807505}
   - component: {fileID: 962807506}
   m_Layer: 0
-  m_Name: Background
+  m_Name: Background_Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -936785,8 +936785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed99b63294bab524c99865868a18ce99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mirror
-  PlayerCam: {fileID: 1388653923}
-  MirrorCam: {fileID: 718471236}
+  PlayerCamera: {fileID: 0}
+  MirrorCamera: {fileID: 0}
 --- !u!1 &1194756335
 GameObject:
   m_ObjectHideFlags: 0
@@ -938961,7 +938961,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1195644804
 Transform:
   m_ObjectHideFlags: 0
@@ -1617209,7 +1617209,7 @@ GameObject:
   - component: {fileID: 2046182699}
   - component: {fileID: 2046182700}
   m_Layer: 0
-  m_Name: Background
+  m_Name: Background_Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1699333,9 +1699333,6 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 863637638}
-  - {fileID: 310613077}
-  - {fileID: 373852911}
   - {fileID: 1678013112}
   - {fileID: 1218410363}
   - {fileID: 196099421}
@@ -1699348,3 +1699345,6 @@ SceneRoots:
   - {fileID: 1426578458}
   - {fileID: 997727926}
   - {fileID: 1195644804}
+  - {fileID: 310613077}
+  - {fileID: 373852911}
+  - {fileID: 863637638}
