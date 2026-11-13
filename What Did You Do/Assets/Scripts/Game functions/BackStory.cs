@@ -16,7 +16,7 @@ public class BackStory : MonoBehaviour
 
     private IEnumerator SceneLoad()
     {
-        yield return new WaitForSeconds(0.15f);
+        yield return new WaitForSeconds(0.8f);
         SceneManager.LoadScene("Main Scene 1");
 
     }

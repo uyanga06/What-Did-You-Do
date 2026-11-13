@@ -17,7 +17,7 @@ MonoBehaviour:
   - Oh my goodness!
   - I believe I've made a grave error
   autoProgressLines: 0101
-  autoProgressDelay: 3
+  autoProgressDelay: 1.5
   typingSpeed: 0.06
   voiceSound: {fileID: 0}
   voicePitch: 1

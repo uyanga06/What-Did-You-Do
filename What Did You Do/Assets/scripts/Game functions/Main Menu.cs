@@ -17,7 +17,7 @@ public class MainMenu : MonoBehaviour
     public void OnPlayClick()
     {
 
-        SceneManager.LoadScene("BackStory");
+        SceneManager.LoadScene("BackStory Cutscene");
 
     }
 
