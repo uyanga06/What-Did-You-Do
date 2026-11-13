@@ -191657,7 +191657,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ef857bb70383b834eb6fe1cf19639250, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c5dcd3e8de2e6034c95de6a155c8defd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -197645,7 +197645,7 @@ Transform:
   m_GameObject: {fileID: 196978500}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.00003528595, z: 1.0999956}
+  m_LocalPosition: {x: 0, y: 0, z: 1.93}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -236875,12 +236875,24 @@ PrefabInstance:
       value: 0.62033707
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -422897,7 +422909,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &416195964
 Transform:
   m_ObjectHideFlags: 0
@@ -438942,7 +438954,7 @@ Transform:
   m_GameObject: {fileID: 440949832}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0000047683716, y: 0.00002002716, z: 1.0999863}
+  m_LocalPosition: {x: -0.0000047683716, y: 0, z: 1.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -825697,12 +825709,24 @@ PrefabInstance:
       value: 0.8748421
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -825744,8 +825768,8 @@ Transform:
   m_GameObject: {fileID: 835347430}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -7145.424, y: -0.8313373, z: -9.601201}
-  m_LocalScale: {x: -1508.8214, y: 3.9837465, z: 0.2907347}
+  m_LocalPosition: {x: -7145.424, y: -0.8313, z: -10.86}
+  m_LocalScale: {x: -1508.8214, y: 3.9837465, z: 0.3151855}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1428485979}
@@ -988895,12 +988919,24 @@ PrefabInstance:
       value: 0.8748421
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1014001,12 +1014037,24 @@ PrefabInstance:
       value: 0.8748421
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1180363,8 +1180411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed99b63294bab524c99865868a18ce99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Mirror
-  PlayerCamera: {fileID: 1678013112}
-  MirrorCamera: {fileID: 718471236}
 --- !u!1 &1194756335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243661,12 +1243707,24 @@ PrefabInstance:
       value: 0.6694002
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1308757,12 +1308815,24 @@ PrefabInstance:
       value: 0.8748421
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1313493,7 +1313563,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.67, y: -12.78706, z: 10.153948}
-  m_LocalScale: {x: 5.558122, y: 6.7997966, z: 4.322488}
+  m_LocalScale: {x: 5.558122, y: 6.7997966, z: 4.375222}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1871212528}
@@ -1380372,7 +1380442,7 @@ Transform:
   m_GameObject: {fileID: 1403391743}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -8746.044, y: -0.6782, z: -9.33}
+  m_LocalPosition: {x: -8723, y: -0.655, z: -14.67}
   m_LocalScale: {x: -621.7087, y: 0.037472967, z: 5.7027345}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1543557,7 +1543627,7 @@ Transform:
   m_GameObject: {fileID: 1570642954}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.126, y: 0.603, z: 4.216}
+  m_LocalPosition: {x: -2.682, y: 0.6, z: 4.216}
   m_LocalScale: {x: 0.37641692, y: 1, z: 0.52531135}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1631829,12 +1631899,24 @@ PrefabInstance:
       value: 0.8748421
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1750633,8 +1750715,8 @@ Transform:
   m_GameObject: {fileID: 1762996084}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0.7071068, w: 0}
-  m_LocalPosition: {x: -6844.8794, y: -0.5905, z: 0.16}
-  m_LocalScale: {x: -178.53041, y: 7.918812, z: 0.03705413}
+  m_LocalPosition: {x: -6845, y: -0.5814, z: 0.16}
+  m_LocalScale: {x: -178.53041, y: 8.795041, z: 0.03705413}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1428485979}
@@ -1845191,12 +1845273,24 @@ PrefabInstance:
       value: 0.8748421
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1888249,7 +1888343,7 @@ Transform:
   m_GameObject: {fileID: 1894254006}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -7519, y: -0.753, z: -18.9}
+  m_LocalPosition: {x: -7555, y: -0.753, z: -19.9}
   m_LocalScale: {x: -212.8797, y: 7.145646, z: 0.03705413}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2147485,12 +2147579,24 @@ PrefabInstance:
       value: 0.84406245
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Height
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_AutoBraking
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
+      propertyPath: avoidancePriority
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 9043441499315508890, guid: efef400a73db4ca45b3742170154d7c3, type: 3}
       propertyPath: m_StoppingDistance
-      value: 0.6
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
