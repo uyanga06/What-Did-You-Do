@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour
     AudioSource audioSource;
     //[SerializeField] private AudioSource walking;
 
+    public GameObject HealthBars;
+
 
     void Awake()
     {
@@ -69,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
         //Time.timeScale = 0f;
     }
-
     void Update()
     {
         
@@ -363,6 +364,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         walkingCoroutine = StartCoroutine(PlayWalking());
+        HealthBars.SetActive(true);
     }
     IEnumerator PlayWalking()
     {
