@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCSystem
   npcName: CC the Witch
   dialogueLines:
-  - Psst... foolish! What the hell did you do?!
+  - Psst... foolish child! What the hell did you do?!
   - You've turned everyone into ZOMBIES!?
   - You have to fix this. Get the anitdote from my lab. but you'll run into some
     trouble
